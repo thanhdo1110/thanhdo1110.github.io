@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - CTDO Connect</title>
+    <meta name="description"
+        content="Get help with CTDO Connect - FAQ, troubleshooting guides, and contact information.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #007AFF;
+            --primary-dark: #0056CC;
+            --success: #34C759;
+            --warning: #FF9500;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-400: #9CA3AF;
+            --gray-500: #6B7280;
+            --gray-600: #4B5563;
+            --gray-700: #374151;
+            --gray-800: #1F2937;
+            --gray-900: #111827;
+            --gradient-2: linear-gradient(135deg, #007AFF 0%, #5856D6 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: var(--gray-700);
+            background: var(--gray-50);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--gray-900);
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-600);
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--gray-900) 0%, var(--gray-800) 100%);
+            padding: 140px 24px 80px;
+            text-align: center;
+            color: white;
+        }
+
+        .page-header h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .page-header p {
+            font-size: 18px;
+            color: var(--gray-400);
+        }
+
+        .content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+
+        /* Contact Cards */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 80px;
+        }
+
+        .contact-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 32px;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+        }
+
+        .contact-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin: 0 auto 20px;
+        }
+
+        .contact-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 8px;
+        }
+
+        .contact-card p {
+            color: var(--gray-500);
+            font-size: 15px;
+            margin: 0;
+        }
+
+        /* FAQ Section */
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-label {
+            display: inline-block;
+            background: rgba(0, 122, 255, 0.1);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--gray-900);
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .section-header p {
+            font-size: 16px;
+            color: var(--gray-500);
+        }
+
+        .faq-list {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 28px 32px;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            font-family: inherit;
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--gray-900);
+            transition: background 0.2s;
+        }
+
+        .faq-question:hover {
+            background: var(--gray-50);
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--gray-400);
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer-content {
+            padding: 0 32px 28px;
+            color: var(--gray-600);
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .faq-answer-content p {
+            margin-bottom: 12px;
+        }
+
+        .faq-answer-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .faq-answer-content code {
+            background: var(--gray-100);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'SF Mono', monospace;
+            font-size: 14px;
+        }
+
+        .faq-answer-content ol,
+        .faq-answer-content ul {
+            margin: 12px 0;
+            padding-left: 24px;
+        }
+
+        .faq-answer-content li {
+            margin-bottom: 6px;
+        }
+
+        /* Troubleshooting Section */
+        .troubleshooting {
+            margin-top: 80px;
+        }
+
+        .trouble-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .trouble-card {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+        }
+
+        .trouble-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 16px;
+        }
+
+        .trouble-card h3 span {
+            font-size: 24px;
+        }
+
+        .trouble-card p {
+            color: var(--gray-600);
+            font-size: 15px;
+            margin-bottom: 16px;
+        }
+
+        .trouble-card .solution {
+            background: rgba(52, 199, 89, 0.1);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .trouble-card .solution strong {
+            color: var(--success);
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .trouble-card .solution p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* Response Time */
+        .response-section {
+            margin-top: 80px;
+            background: linear-gradient(135deg, var(--gray-900) 0%, var(--gray-800) 100%);
+            border-radius: 24px;
+            padding: 60px;
+            text-align: center;
+            color: white;
+        }
+
+        .response-section h2 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .response-section p {
+            color: var(--gray-400);
+            font-size: 16px;
+            margin-bottom: 32px;
+        }
+
+        .response-badges {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .response-badge {
+            text-align: center;
+        }
+
+        .response-badge .time {
+            font-size: 48px;
+            font-weight: 800;
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .response-badge .label {
+            font-size: 14px;
+            color: var(--gray-400);
+            margin-top: 8px;
+        }
+
+        footer {
+            background: white;
+            border-top: 1px solid var(--gray-200);
+            padding: 40px 24px;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        footer p {
+            color: var(--gray-500);
+            margin: 0;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .page-header h1 {
+                font-size: 32px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .trouble-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .response-badges {
+                flex-direction: column;
+                gap: 24px;
+            }
+
+            .response-section {
+                padding: 40px 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">C</div>
+                CTDO Connect
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+                <li><a href="support.html" class="active">Support</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1>Support Center</h1>
+        <p>Get help with CTDO Connect. We're here to assist you.</p>
+    </header>
+
+    <!-- Content -->
+    <main class="content">
+        <!-- Contact Cards -->
+        <div class="contact-grid">
+            <a href="mailto:support@ctdo.net" class="contact-card">
+                <div class="contact-icon" style="background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);">📧
+                </div>
+                <h3>Email Support</h3>
+                <p>support@ctdo.net</p>
+            </a>
+            <a href="https://ctdo.net" class="contact-card" target="_blank">
+                <div class="contact-icon" style="background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);">🌐
+                </div>
+                <h3>Website</h3>
+                <p>ctdo.net</p>
+            </a>
+            <a href="#faq" class="contact-card">
+                <div class="contact-icon" style="background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);">❓</div>
+                <h3>FAQ</h3>
+                <p>Find quick answers</p>
+            </a>
+        </div>
+
+        <!-- FAQ Section -->
+        <section id="faq">
+            <div class="section-header">
+                <span class="section-label">FAQ</span>
+                <h2>Frequently Asked Questions</h2>
+                <p>Find answers to common questions about CTDO Connect</p>
+            </div>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question">How do I get an App Store Connect API Key?</button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>To create an API key for use with CTDO Connect:</p>
+                            <ol>
+                                <li>Sign in to <a href="https://appstoreconnect.apple.com" target="_blank">App Store
+                                        Connect</a></li>
+                                <li>Go to <strong>Users and Access</strong></li>
+                                <li>Select the <strong>Keys</strong> tab under "Integrations"</li>
+                                <li>Click the <strong>+</strong> button to create a new key</li>
+                                <li>Give it a name (e.g., "CTDO Connect")</li>
+                                <li>Select <strong>Admin</strong> or <strong>Developer</strong> access (Admin
+                                    recommended)</li>
+                                <li>Download the <code>.p8</code> private key file immediately (you can only download it
+                                    once!)</li>
+                                <li>Note the <strong>Key ID</strong> and <strong>Issuer ID</strong> from the page</li>
+                            </ol>
+                            <p>You'll need all three pieces of information (Issuer ID, Key ID, and the .p8 file) to add
+                                the key to CTDO Connect.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Is my API key safe in the app?</button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Yes, your API key is stored securely. Here's how we protect it:</p>
+                            <ul>
+                                <li><strong>iOS Keychain:</strong> Your private key is stored in the iOS Keychain, which
+                                    provides hardware-level encryption</li>
+                                <li><strong>No Cloud Sync:</strong> We don't sync your keys to iCloud or any cloud
+                                    service</li>
+                                <li><strong>No External Servers:</strong> We don't have any servers - all communication
+                                    is directly between your device and Apple</li>
+                                <li><strong>Sandboxed Storage:</strong> The app's data is sandboxed and cannot be
+                                    accessed by other apps</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">How do I create a CSR (Certificate Signing Request)?</button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>CTDO Connect offers two ways to create certificates:</p>
+                            <p><strong>Option 1: Auto-Generate (Recommended)</strong></p>
+                            <ol>
+                                <li>Go to Certificates tab and tap <strong>+</strong></li>
+                                <li>Select certificate type</li>
+                                <li>Enter your email address</li>
+                                <li>Tap <strong>"Auto-Generate CSR + Private Key"</strong></li>
+                                <li>The app will generate both automatically</li>
+                            </ol>
+                            <p><strong>Option 2: Import existing CSR</strong></p>
+                            <ol>
+                                <li>On your Mac, open <strong>Keychain Access</strong></li>
+                                <li>Go to Keychain Access → Certificate Assistant → Request a Certificate from a
+                                    Certificate Authority</li>
+                                <li>Enter your email, select "Saved to disk"</li>
+                                <li>Save the .certSigningRequest file</li>
+                                <li>Import this file in CTDO Connect</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Why can't I see my certificates/profiles/devices?</button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>If you're not seeing your resources, try these steps:</p>
+                            <ol>
+                                <li><strong>Check API Key Permissions:</strong> Ensure your API key has "Admin" or
+                                    "Developer" access level</li>
+                                <li><strong>Pull to Refresh:</strong> Pull down on any list to force a refresh from
+                                    Apple's servers</li>
+                                <li><strong>Check Team Selection:</strong> If you have multiple teams, make sure you're
+                                    using the correct API key</li>
+                                <li><strong>Wait for Propagation:</strong> Sometimes Apple's API takes a few minutes to
+                                    reflect recent changes</li>
+                                <li><strong>Clear Cache:</strong> Go to Settings → Clear Cache, then refresh</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Can I edit a provisioning profile?</button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Yes! CTDO Connect supports editing profiles. Here's how it works:</p>
+                            <p>Apple's API doesn't allow direct editing of profiles. So when you "edit" a profile in
+                                CTDO Connect, the app:</p>
+                            <ol>
+                                <li>Saves your new settings</li>
+                                <li>Deletes the old profile</li>
+                                <li>Creates a new profile with your updated settings</li>
+                            </ol>
+                            <p>This happens seamlessly - you'll see a loading indicator while the process completes. The
+                                new profile will have a new UUID, which is normal.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Does the app work offline?</button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Partially. Here's what works offline:</p>
+                            <ul>
+                                <li><strong>Viewing cached data:</strong> You can view previously loaded certificates,
+                                    profiles, devices, and identifiers</li>
+                                <li><strong>Copying information:</strong> You can copy UDIDs, IDs, and other cached info
+                                </li>
+                            </ul>
+                            <p>These features require an internet connection:</p>
+                            <ul>
+                                <li>Creating new certificates, profiles, or identifiers</li>
+                                <li>Downloading certificates or profiles</li>
+                                <li>Refreshing data from Apple's servers</li>
+                                <li>Editing or deleting resources</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">How do I switch between multiple Apple Developer accounts?</button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>CTDO Connect supports multiple API keys for different teams:</p>
+                            <ol>
+                                <li>Go to <strong>Settings</strong> tab</li>
+                                <li>Tap <strong>"Add API Key"</strong></li>
+                                <li>Enter the credentials for your other team</li>
+                                <li>Once added, tap on any key to select it as active</li>
+                            </ol>
+                            <p>The app will immediately load data for the selected team. A checkmark indicates which key
+                                is currently active.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">What does "Background Updates" do?</button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>The Background Updates feature allows CTDO Connect to:</p>
+                            <ul>
+                                <li>Periodically check your device registration status</li>
+                                <li>Notify you when a device status changes (e.g., Processing → Enabled)</li>
+                            </ul>
+                            <p>This is especially useful when you register a new device and want to know when it's ready
+                                to use in provisioning profiles.</p>
+                            <p><strong>Note:</strong> This feature requires notification permissions to work.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Troubleshooting Section -->
+        <section class="troubleshooting">
+            <div class="section-header">
+                <span class="section-label">Troubleshooting</span>
+                <h2>Common Issues & Solutions</h2>
+            </div>
+
+            <div class="trouble-grid">
+                <div class="trouble-card">
+                    <h3><span>🔐</span> "Invalid API Key" Error</h3>
+                    <p>This error occurs when the app cannot authenticate with Apple's servers.</p>
+                    <div class="solution">
+                        <strong>✅ Solution:</strong>
+                        <p>Double-check your Issuer ID, Key ID, and private key. Make sure you're pasting the entire
+                            contents of the .p8 file, including the BEGIN and END lines.</p>
+                    </div>
+                </div>
+
+                <div class="trouble-card">
+                    <h3><span>⏱️</span> "Request Timed Out" Error</h3>
+                    <p>The connection to Apple's servers took too long.</p>
+                    <div class="solution">
+                        <strong>✅ Solution:</strong>
+                        <p>Check your internet connection. Apple's API can sometimes be slow - try again in a few
+                            minutes. VPN or proxy might also cause issues.</p>
+                    </div>
+                </div>
+
+                <div class="trouble-card">
+                    <h3><span>📱</span> Device Not Showing in Profile</h3>
+                    <p>A newly registered device isn't appearing in profile creation.</p>
+                    <div class="solution">
+                        <strong>✅ Solution:</strong>
+                        <p>Pull to refresh the Devices list. If the device shows "Processing" status, wait until it
+                            changes to "Enabled" before creating a profile.</p>
+                    </div>
+                </div>
+
+                <div class="trouble-card">
+                    <h3><span>📋</span> Profile Shows as "Invalid"</h3>
+                    <p>An existing profile is marked as invalid.</p>
+                    <div class="solution">
+                        <strong>✅ Solution:</strong>
+                        <p>This usually means a certificate in the profile was revoked. Create a new profile with valid
+                            certificates using the Edit feature.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Response Time Section -->
+        <section class="response-section">
+            <h2>Our Response Times</h2>
+            <p>We're committed to providing timely support for all your questions</p>
+            <div class="response-badges">
+                <div class="response-badge">
+                    <div class="time">&lt;24h</div>
+                    <div class="label">General Questions</div>
+                </div>
+                <div class="response-badge">
+                    <div class="time">&lt;48h</div>
+                    <div class="label">Technical Issues</div>
+                </div>
+                <div class="response-badge">
+                    <div class="time">&lt;12h</div>
+                    <div class="label">Critical Bugs</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 CTDO. All rights reserved. | <a href="index.html">Home</a> | <a href="privacy.html">Privacy Policy</a>
+            | <a href="terms.html">Terms of Service</a></p>
+    </footer>
+
+    <script>
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.parentElement;
+                const isActive = item.classList.contains('active');
+
+                // Close all items
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

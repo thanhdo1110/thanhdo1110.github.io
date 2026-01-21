@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - CTDO Connect</title>
+    <meta name="description"
+        content="Privacy Policy for CTDO Connect - Learn how we protect your data and respect your privacy.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #007AFF;
+            --primary-dark: #0056CC;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-400: #9CA3AF;
+            --gray-500: #6B7280;
+            --gray-600: #4B5563;
+            --gray-700: #374151;
+            --gray-800: #1F2937;
+            --gray-900: #111827;
+            --gradient-2: linear-gradient(135deg, #007AFF 0%, #5856D6 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: var(--gray-700);
+            background: var(--gray-50);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--gray-900);
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-600);
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--gray-900) 0%, var(--gray-800) 100%);
+            padding: 140px 24px 80px;
+            text-align: center;
+            color: white;
+        }
+
+        .page-header h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .page-header p {
+            font-size: 18px;
+            color: var(--gray-400);
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 24px;
+            padding: 60px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+        }
+
+        .last-updated {
+            display: inline-block;
+            background: rgba(0, 122, 255, 0.1);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-top: 48px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--gray-100);
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+        }
+
+        h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-top: 32px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: var(--gray-600);
+        }
+
+        ul,
+        ol {
+            margin-bottom: 16px;
+            padding-left: 24px;
+            color: var(--gray-600);
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        strong {
+            color: var(--gray-800);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 122, 255, 0.05) 0%, rgba(88, 86, 214, 0.05) 100%);
+            border-left: 4px solid var(--primary);
+            padding: 24px;
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            color: var(--gray-700);
+        }
+
+        .success-box {
+            background: rgba(52, 199, 89, 0.1);
+            border-left: 4px solid #34C759;
+            padding: 24px;
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0;
+        }
+
+        .success-box p {
+            margin: 0;
+            color: var(--gray-700);
+        }
+
+        footer {
+            background: var(--gray-900);
+            color: white;
+            padding: 40px 24px;
+            text-align: center;
+        }
+
+        footer p {
+            color: var(--gray-400);
+            margin: 0;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .page-header h1 {
+                font-size: 32px;
+            }
+
+            .content-card {
+                padding: 32px 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">C</div>
+                CTDO Connect
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="privacy.html" class="active">Privacy Policy</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+                <li><a href="support.html">Support</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1>Privacy Policy</h1>
+        <p>Your privacy is important to us. Learn how we handle your data.</p>
+    </header>
+
+    <!-- Content -->
+    <main class="content">
+        <div class="content-card">
+            <span class="last-updated">Last Updated: January 21, 2026</span>
+
+            <h2>1. Introduction</h2>
+            <p>Welcome to CTDO Connect ("the App"). This Privacy Policy explains how we collect, use, disclose, and
+                safeguard your information when you use our mobile application. We are committed to protecting your
+                privacy and ensuring you have a positive experience using our app.</p>
+
+            <div class="success-box">
+                <p><strong>🛡️ Privacy First:</strong> CTDO Connect is designed with privacy as a core principle. We do
+                    not collect, store, or transmit your personal data to any external servers. All sensitive
+                    information stays on your device.</p>
+            </div>
+
+            <h2>2. Information We Do NOT Collect</h2>
+            <p>Unlike many apps, CTDO Connect is built to respect your privacy completely. We do <strong>NOT</strong>
+                collect:</p>
+            <ul>
+                <li>Personal identification information (name, email address, phone number)</li>
+                <li>Device identifiers or advertising IDs</li>
+                <li>Location data</li>
+                <li>Usage analytics or behavioral data</li>
+                <li>Crash reports sent to external servers</li>
+                <li>Any data from your Apple Developer account</li>
+            </ul>
+
+            <h2>3. Information Stored Locally on Your Device</h2>
+            <p>To provide our services, certain information is stored <strong>locally</strong> on your device:</p>
+
+            <h3>3.1 App Store Connect API Keys</h3>
+            <p>When you add an API key to the app, the following information is stored:</p>
+            <ul>
+                <li><strong>Issuer ID:</strong> Your App Store Connect team's Issuer ID</li>
+                <li><strong>Key ID:</strong> The identifier of your API key</li>
+                <li><strong>Private Key:</strong> The .p8 private key file contents</li>
+            </ul>
+
+            <div class="highlight-box">
+                <p><strong>🔐 Security:</strong> All API key data is stored exclusively in the iOS Keychain, which
+                    provides hardware-level encryption. This data is protected by your device's secure enclave and
+                    cannot be accessed by other apps or extracted from backups.</p>
+            </div>
+
+            <h3>3.2 Cached Data</h3>
+            <p>To improve performance, the app caches data retrieved from Apple's servers:</p>
+            <ul>
+                <li>List of certificates, profiles, devices, and identifiers</li>
+                <li>This cached data is stored in the app's sandboxed storage</li>
+                <li>You can clear this cache at any time from the Settings screen</li>
+            </ul>
+
+            <h3>3.3 App Preferences</h3>
+            <p>User preferences are stored locally using iOS UserDefaults:</p>
+            <ul>
+                <li>Selected language (English/Vietnamese)</li>
+                <li>Background update preferences</li>
+                <li>Selected API key</li>
+            </ul>
+
+            <h2>4. How Your Data is Used</h2>
+            <p>Your API keys are used solely to authenticate requests to Apple's App Store Connect API. The app:</p>
+            <ul>
+                <li>Generates JWT tokens locally using your private key</li>
+                <li>Sends authenticated requests directly to Apple's servers (api.appstoreconnect.apple.com)</li>
+                <li>Displays the responses within the app interface</li>
+            </ul>
+
+            <div class="success-box">
+                <p><strong>✅ Direct Communication:</strong> All network requests go directly from your device to Apple's
+                    servers. We do not operate any intermediate servers, proxies, or data collection endpoints.</p>
+            </div>
+
+            <h2>5. Third-Party Services</h2>
+            <p>CTDO Connect communicates with the following third-party services:</p>
+
+            <h3>5.1 Apple App Store Connect API</h3>
+            <p>The app communicates with Apple's official API to manage your developer resources. Apple's privacy policy
+                applies to this data exchange. Visit <a href="https://www.apple.com/legal/privacy/"
+                    target="_blank">Apple's Privacy Policy</a> for more information.</p>
+
+            <h3>5.2 No Analytics or Advertising SDKs</h3>
+            <p>We do not integrate any third-party analytics, advertising, or tracking SDKs. This means:</p>
+            <ul>
+                <li>No Google Analytics or Firebase</li>
+                <li>No Facebook SDK</li>
+                <li>No advertising networks</li>
+                <li>No crash reporting services (like Crashlytics)</li>
+            </ul>
+
+            <h2>6. Data Security</h2>
+            <p>We implement industry-standard security measures to protect your data:</p>
+            <ul>
+                <li><strong>Keychain Storage:</strong> Sensitive data is stored in iOS Keychain with hardware encryption
+                </li>
+                <li><strong>HTTPS Only:</strong> All API communications use TLS 1.2 or higher encryption</li>
+                <li><strong>No Cloud Sync:</strong> Your API keys are not synced to iCloud or any cloud service</li>
+                <li><strong>Memory Safety:</strong> Sensitive data is cleared from memory when not in use</li>
+            </ul>
+
+            <h2>7. Data Retention and Deletion</h2>
+            <p>Since all data is stored locally on your device:</p>
+            <ul>
+                <li>Data is retained until you manually delete it or uninstall the app</li>
+                <li>You can delete individual API keys from the Settings screen</li>
+                <li>You can clear all cached data from the Settings screen</li>
+                <li>Uninstalling the app removes all associated data from your device</li>
+            </ul>
+
+            <h2>8. Children's Privacy</h2>
+            <p>CTDO Connect is designed for professional software developers. We do not knowingly collect information
+                from children under 13 years of age. The app is rated 4+ but requires an Apple Developer Program
+                membership to be useful, which is only available to adults.</p>
+
+            <h2>9. Changes to This Privacy Policy</h2>
+            <p>We may update this Privacy Policy from time to time. We will notify you of any changes by:</p>
+            <ul>
+                <li>Posting the new Privacy Policy on this page</li>
+                <li>Updating the "Last Updated" date at the top of this policy</li>
+                <li>For significant changes, displaying an in-app notification</li>
+            </ul>
+
+            <h2>10. Your Rights</h2>
+            <p>Depending on your location, you may have certain rights regarding your data:</p>
+            <ul>
+                <li><strong>Access:</strong> You can view all data stored by the app at any time</li>
+                <li><strong>Deletion:</strong> You can delete all data by clearing cache and removing API keys</li>
+                <li><strong>Portability:</strong> Since data is on your device, you already have full access</li>
+            </ul>
+
+            <h2>11. Contact Us</h2>
+            <p>If you have any questions about this Privacy Policy or our data practices, please contact us:</p>
+            <ul>
+                <li><strong>Email:</strong> <a href="mailto:support@ctdo.net">support@ctdo.net</a></li>
+                <li><strong>Website:</strong> <a href="https://ctdo.net">https://ctdo.net</a></li>
+            </ul>
+
+            <div class="highlight-box">
+                <p><strong>📧 Response Time:</strong> We typically respond to privacy-related inquiries within 48 hours.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 CTDO. All rights reserved. | <a href="index.html">Home</a> | <a href="terms.html">Terms of Service</a>
+            | <a href="support.html">Support</a></p>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - CTDO Connect</title>
+    <meta name="description"
+        content="Terms of Service for CTDO Connect - Read our terms and conditions for using the app.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #007AFF;
+            --primary-dark: #0056CC;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-400: #9CA3AF;
+            --gray-500: #6B7280;
+            --gray-600: #4B5563;
+            --gray-700: #374151;
+            --gray-800: #1F2937;
+            --gray-900: #111827;
+            --gradient-2: linear-gradient(135deg, #007AFF 0%, #5856D6 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: var(--gray-700);
+            background: var(--gray-50);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--gray-900);
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-600);
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--gray-900) 0%, var(--gray-800) 100%);
+            padding: 140px 24px 80px;
+            text-align: center;
+            color: white;
+        }
+
+        .page-header h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .page-header p {
+            font-size: 18px;
+            color: var(--gray-400);
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 24px;
+            padding: 60px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+        }
+
+        .last-updated {
+            display: inline-block;
+            background: rgba(0, 122, 255, 0.1);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-top: 48px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--gray-100);
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+        }
+
+        h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-top: 32px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: var(--gray-600);
+        }
+
+        ul,
+        ol {
+            margin-bottom: 16px;
+            padding-left: 24px;
+            color: var(--gray-600);
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        strong {
+            color: var(--gray-800);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 122, 255, 0.05) 0%, rgba(88, 86, 214, 0.05) 100%);
+            border-left: 4px solid var(--primary);
+            padding: 24px;
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            color: var(--gray-700);
+        }
+
+        .warning-box {
+            background: rgba(255, 149, 0, 0.1);
+            border-left: 4px solid #FF9500;
+            padding: 24px;
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0;
+        }
+
+        .warning-box p {
+            margin: 0;
+            color: var(--gray-700);
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background: var(--gray-900);
+            color: white;
+            padding: 40px 24px;
+            text-align: center;
+        }
+
+        footer p {
+            color: var(--gray-400);
+            margin: 0;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .page-header h1 {
+                font-size: 32px;
+            }
+
+            .content-card {
+                padding: 32px 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">C</div>
+                CTDO Connect
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="terms.html" class="active">Terms of Service</a></li>
+                <li><a href="support.html">Support</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1>Terms of Service</h1>
+        <p>Please read these terms carefully before using CTDO Connect.</p>
+    </header>
+
+    <!-- Content -->
+    <main class="content">
+        <div class="content-card">
+            <span class="last-updated">Last Updated: January 21, 2026</span>
+
+            <h2>1. Agreement to Terms</h2>
+            <p>By downloading, installing, or using CTDO Connect ("the App"), you agree to be bound by these Terms of
+                Service ("Terms"). If you do not agree to these Terms, please do not use the App.</p>
+            <p>These Terms constitute a legally binding agreement between you and CTDO ("we," "us," or "our") regarding
+                your use of the App.</p>
+
+            <h2>2. Description of Service</h2>
+            <p>CTDO Connect is a mobile application designed to help Apple Developer Program members manage their
+                development resources, including:</p>
+            <ul>
+                <li>Viewing, creating, and managing signing certificates</li>
+                <li>Creating and downloading provisioning profiles</li>
+                <li>Registering and managing test devices</li>
+                <li>Creating and configuring App IDs (Bundle Identifiers)</li>
+            </ul>
+            <p>The App uses the official App Store Connect API provided by Apple Inc. to perform these functions.</p>
+
+            <h2>3. Eligibility</h2>
+            <p>To use CTDO Connect, you must:</p>
+            <ul>
+                <li>Be at least 18 years old or the age of majority in your jurisdiction</li>
+                <li>Be an active member of the Apple Developer Program or Apple Developer Enterprise Program</li>
+                <li>Have valid App Store Connect API credentials</li>
+                <li>Comply with Apple's Developer Program License Agreement</li>
+            </ul>
+
+            <h2>4. Your Responsibilities</h2>
+
+            <h3>4.1 API Key Security</h3>
+            <p>You are solely responsible for:</p>
+            <ul>
+                <li>Safeguarding your App Store Connect API keys</li>
+                <li>Ensuring your API keys are not shared with unauthorized parties</li>
+                <li>Revoking compromised API keys through Apple's developer portal</li>
+                <li>All activities that occur using your API keys through the App</li>
+            </ul>
+
+            <div class="warning-box">
+                <p><strong>⚠️ Important:</strong> Your API keys provide access to sensitive developer resources. Treat
+                    them with the same care as passwords. We are not responsible for any unauthorized access resulting
+                    from compromised credentials.</p>
+            </div>
+
+            <h3>4.2 Lawful Use</h3>
+            <p>You agree to use the App only for lawful purposes and in accordance with:</p>
+            <ul>
+                <li>These Terms of Service</li>
+                <li>Apple's Developer Program License Agreement</li>
+                <li>Apple's App Store Connect API Terms of Use</li>
+                <li>All applicable local, state, national, and international laws</li>
+            </ul>
+
+            <h3>4.3 Prohibited Activities</h3>
+            <p>You agree NOT to:</p>
+            <ul>
+                <li>Use the App for any illegal or unauthorized purpose</li>
+                <li>Attempt to reverse engineer, decompile, or disassemble the App</li>
+                <li>Use the App to violate Apple's terms of service</li>
+                <li>Use the App to create, distribute, or sign malicious software</li>
+                <li>Share, sell, or transfer your access to the App to third parties</li>
+                <li>Use automated scripts or bots with the App</li>
+                <li>Attempt to circumvent any security features of the App</li>
+            </ul>
+
+            <h2>5. Intellectual Property</h2>
+
+            <h3>5.1 Our Rights</h3>
+            <p>The App and its original content, features, and functionality are owned by CTDO and are protected by
+                international copyright, trademark, and other intellectual property laws.</p>
+
+            <h3>5.2 Third-Party Rights</h3>
+            <p>Apple, App Store Connect, iOS, and other Apple-related trademarks are the property of Apple Inc. This App
+                is not affiliated with, endorsed by, or sponsored by Apple Inc.</p>
+
+            <h3>5.3 Your License</h3>
+            <p>We grant you a limited, non-exclusive, non-transferable, revocable license to use the App for your
+                personal or internal business purposes, subject to these Terms.</p>
+
+            <h2>6. Disclaimers</h2>
+
+            <h3>6.1 "As Is" Basis</h3>
+            <p>THE APP IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED,
+                INCLUDING BUT NOT LIMITED TO:</p>
+            <ul>
+                <li>Implied warranties of merchantability</li>
+                <li>Fitness for a particular purpose</li>
+                <li>Non-infringement</li>
+                <li>Accuracy or reliability of any information</li>
+            </ul>
+
+            <h3>6.2 Third-Party Services</h3>
+            <p>We do not guarantee that:</p>
+            <ul>
+                <li>Apple's API will always be available or function correctly</li>
+                <li>The App will work with future versions of Apple's API</li>
+                <li>Apple will not change their API in ways that affect the App's functionality</li>
+            </ul>
+
+            <h3>6.3 No Professional Advice</h3>
+            <p>The App is a tool for managing developer resources. It does not provide legal, professional, or
+                certification advice regarding code signing, app distribution, or compliance.</p>
+
+            <h2>7. Limitation of Liability</h2>
+            <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, CTDO SHALL NOT BE LIABLE FOR:</p>
+            <ul>
+                <li>Any indirect, incidental, special, consequential, or punitive damages</li>
+                <li>Loss of profits, data, use, or goodwill</li>
+                <li>Any damages arising from your use or inability to use the App</li>
+                <li>Any unauthorized access to your API keys or developer resources</li>
+                <li>Any issues with certificates, profiles, or apps signed using resources managed through the App</li>
+            </ul>
+
+            <div class="highlight-box">
+                <p><strong>📋 Note:</strong> Some jurisdictions do not allow the exclusion of certain warranties or
+                    limitations of liability. In such cases, our liability will be limited to the maximum extent
+                    permitted by law.</p>
+            </div>
+
+            <h2>8. Indemnification</h2>
+            <p>You agree to indemnify, defend, and hold harmless CTDO and its officers, directors, employees, and agents
+                from any claims, damages, losses, liabilities, costs, or expenses (including reasonable attorneys' fees)
+                arising from:</p>
+            <ul>
+                <li>Your use of the App</li>
+                <li>Your violation of these Terms</li>
+                <li>Your violation of any third-party rights</li>
+                <li>Your violation of any applicable laws or regulations</li>
+            </ul>
+
+            <h2>9. Termination</h2>
+            <p>We may terminate or suspend your access to the App immediately, without prior notice, for any reason,
+                including if you breach these Terms.</p>
+            <p>Upon termination:</p>
+            <ul>
+                <li>Your license to use the App will immediately cease</li>
+                <li>You must delete the App from your devices</li>
+                <li>Provisions of these Terms that should survive termination will remain in effect</li>
+            </ul>
+
+            <h2>10. Changes to Terms</h2>
+            <p>We reserve the right to modify these Terms at any time. We will provide notice of significant changes by:
+            </p>
+            <ul>
+                <li>Posting the updated Terms on our website</li>
+                <li>Updating the "Last Updated" date</li>
+                <li>Displaying an in-app notification when appropriate</li>
+            </ul>
+            <p>Your continued use of the App after changes constitutes acceptance of the new Terms.</p>
+
+            <h2>11. Governing Law</h2>
+            <p>These Terms shall be governed by and construed in accordance with the laws of Vietnam, without regard to
+                its conflict of law provisions.</p>
+            <p>Any disputes arising from these Terms or the App shall be resolved through good-faith negotiation. If
+                negotiation fails, disputes shall be submitted to the competent courts of Vietnam.</p>
+
+            <h2>12. Severability</h2>
+            <p>If any provision of these Terms is found to be unenforceable or invalid, that provision shall be limited
+                or eliminated to the minimum extent necessary, and the remaining provisions shall remain in full force
+                and effect.</p>
+
+            <h2>13. Entire Agreement</h2>
+            <p>These Terms, together with our Privacy Policy, constitute the entire agreement between you and CTDO
+                regarding the App and supersede all prior agreements and understandings.</p>
+
+            <h2>14. Contact Information</h2>
+            <p>For questions about these Terms of Service, please contact us:</p>
+            <ul>
+                <li><strong>Email:</strong> <a href="mailto:support@ctdo.net">support@ctdo.net</a></li>
+                <li><strong>Website:</strong> <a href="https://ctdo.net">https://ctdo.net</a></li>
+            </ul>
+
+            <h2>15. Acknowledgment</h2>
+            <p>By using CTDO Connect, you acknowledge that you have read these Terms of Service, understood them, and
+                agree to be bound by them.</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 CTDO. All rights reserved. | <a href="index.html">Home</a> | <a href="privacy.html">Privacy Policy</a>
+            | <a href="support.html">Support</a></p>
+    </footer>
+</body>
+
+</html>
