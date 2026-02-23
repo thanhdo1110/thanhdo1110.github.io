@@ -419,14 +419,23 @@
             event.target.classList.add('active');
         }
         
-        if (window.location.hash) {
-            const section = window.location.hash.substring(1);
-            if (document.getElementById(section)) {
-                showSection(section);
-                document.querySelector(`[onclick="showSection('${section}')"]`).classList.add('active');
-                document.querySelector(`[onclick="showSection('privacy')"]`).classList.remove('active');
+        function initFromURL() {
+            let section = null;
+            if (window.location.hash) {
+                section = window.location.hash.substring(1).toLowerCase();
+            } else if (window.location.search) {
+                const params = new URLSearchParams(window.location.search);
+                section = (params.get('') || params.get('section') || '').toLowerCase();
+            }
+            if (section && document.getElementById(section)) {
+                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                document.getElementById(section).classList.add('active');
+                const btn = document.querySelector(`[onclick="showSection('${section}')"]`);
+                if (btn) btn.classList.add('active');
             }
         }
+        initFromURL();
     </script>
 </body>
 </html>
