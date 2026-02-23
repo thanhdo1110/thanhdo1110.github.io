@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VocaFlip - Legal & Support</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #007AFF;
+            --bg: #f5f5f7;
+            --card: #ffffff;
+            --text: #1d1d1f;
+            --secondary: #86868b;
+            --border: #d2d2d7;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #000000;
+                --card: #1c1c1e;
+                --text: #f5f5f7;
+                --secondary: #98989d;
+                --border: #38383a;
+            }
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #007AFF, #5856D6);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 36px;
+        }
+        
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .tagline {
+            color: var(--secondary);
+            font-size: 17px;
+        }
+        
+        nav {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 32px;
+        }
+        
+        .nav-btn {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text);
+            transition: all 0.2s;
+        }
+        
+        .nav-btn:hover, .nav-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .section {
+            display: none;
+            background: var(--card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+            border: 1px solid var(--border);
+        }
+        
+        .section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        h3 {
+            font-size: 18px;
+            margin: 24px 0 12px;
+            color: var(--primary);
+        }
+        
+        p {
+            margin-bottom: 16px;
+            color: var(--text);
+        }
+        
+        ul {
+            margin: 16px 0;
+            padding-left: 24px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, rgba(0,122,255,0.1), rgba(88,86,214,0.1));
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+        
+        .contact-card {
+            background: var(--bg);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text);
+            transition: transform 0.2s;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        .contact-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        
+        .contact-label {
+            font-size: 12px;
+            color: var(--secondary);
+            margin-bottom: 4px;
+        }
+        
+        .contact-value {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--secondary);
+            font-size: 14px;
+        }
+        
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .team-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #007AFF, #5856D6);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-top: 16px;
+        }
+        
+        .last-updated {
+            font-size: 12px;
+            color: var(--secondary);
+            margin-top: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">📚</div>
+            <h1>VocaFlip</h1>
+            <p class="tagline">Learn Vocabulary the Smart Way</p>
+        </header>
+        
+        <nav>
+            <button class="nav-btn active" onclick="showSection('privacy')">Privacy Policy</button>
+            <button class="nav-btn" onclick="showSection('terms')">Terms of Service</button>
+            <button class="nav-btn" onclick="showSection('support')">Support</button>
+            <button class="nav-btn" onclick="showSection('marketing')">About</button>
+        </nav>
+        
+        <section id="privacy" class="section active">
+            <h2>🔒 Privacy Policy</h2>
+            
+            <h3>Introduction</h3>
+            <p>VocaFlip ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use our mobile application.</p>
+            
+            <h3>Information We Collect</h3>
+            <div class="highlight">
+                <strong>We do NOT collect personal data.</strong> VocaFlip is designed with privacy-first principles. All your study data (vocabulary, progress, statistics) is stored locally on your device only.
+            </div>
+            
+            <h3>Data Storage</h3>
+            <ul>
+                <li><strong>Local Storage:</strong> All vocabulary sets, study progress, and settings are stored on your device using Apple's secure data storage mechanisms.</li>
+                <li><strong>No Cloud Sync:</strong> We do not upload your data to any servers.</li>
+                <li><strong>No Account Required:</strong> You can use VocaFlip without creating an account.</li>
+            </ul>
+            
+            <h3>Technical Data</h3>
+            <p>We may collect anonymous, aggregated analytics data through Apple's App Analytics to improve app performance. This data does not identify individual users.</p>
+            
+            <h3>Third-Party Services</h3>
+            <p>VocaFlip does not integrate with any third-party advertising or tracking services.</p>
+            
+            <h3>Children's Privacy</h3>
+            <p>VocaFlip is suitable for users of all ages. We do not knowingly collect information from children under 13.</p>
+            
+            <h3>Changes to This Policy</h3>
+            <p>We may update this Privacy Policy from time to time. Any changes will be posted within the app and on this page.</p>
+            
+            <h3>Contact Us</h3>
+            <p>If you have questions about this Privacy Policy, please contact us at <a href="mailto:admin@ctdo.dev">admin@ctdo.dev</a></p>
+            
+            <p class="last-updated">Last updated: February 2026</p>
+        </section>
+        
+        <section id="terms" class="section">
+            <h2>📋 Terms of Service</h2>
+            
+            <h3>Acceptance of Terms</h3>
+            <p>By downloading, installing, or using VocaFlip, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use the app.</p>
+            
+            <h3>License</h3>
+            <p>VocaFlip grants you a limited, non-exclusive, non-transferable, revocable license to use the app for personal, non-commercial purposes.</p>
+            
+            <h3>User Responsibilities</h3>
+            <ul>
+                <li>You are responsible for maintaining the security of your device.</li>
+                <li>You agree not to reverse engineer, decompile, or disassemble the app.</li>
+                <li>You agree not to use the app for any unlawful purpose.</li>
+            </ul>
+            
+            <h3>Intellectual Property</h3>
+            <p>All content, design, graphics, and code in VocaFlip are owned by CTDOTEAM and protected by intellectual property laws.</p>
+            
+            <h3>User Content</h3>
+            <p>You retain ownership of any vocabulary content you create within the app. We do not claim any rights to your study materials.</p>
+            
+            <h3>Disclaimer of Warranties</h3>
+            <p>VocaFlip is provided "as is" without warranties of any kind. We do not guarantee that the app will be error-free or uninterrupted.</p>
+            
+            <h3>Limitation of Liability</h3>
+            <p>To the maximum extent permitted by law, CTDOTEAM shall not be liable for any indirect, incidental, or consequential damages arising from your use of the app.</p>
+            
+            <h3>Modifications</h3>
+            <p>We reserve the right to modify these terms at any time. Continued use of the app after changes constitutes acceptance of the new terms.</p>
+            
+            <h3>Governing Law</h3>
+            <p>These terms shall be governed by and construed in accordance with applicable laws.</p>
+            
+            <h3>Contact</h3>
+            <p>For questions about these Terms, contact us at <a href="mailto:admin@ctdo.dev">admin@ctdo.dev</a></p>
+            
+            <p class="last-updated">Last updated: February 2026</p>
+        </section>
+        
+        <section id="support" class="section">
+            <h2>💬 Support</h2>
+            
+            <h3>How Can We Help?</h3>
+            <p>We're here to help you get the most out of VocaFlip. Choose your preferred contact method below.</p>
+            
+            <div class="contact-grid">
+                <a href="mailto:admin@ctdo.dev" class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-label">Email</div>
+                    <div class="contact-value">admin@ctdo.dev</div>
+                </a>
+                
+                <a href="https://t.me/dothanh1110" target="_blank" class="contact-card">
+                    <div class="contact-icon">✈️</div>
+                    <div class="contact-label">Telegram</div>
+                    <div class="contact-value">@dothanh1110</div>
+                </a>
+                
+                <a href="https://www.facebook.com/groups/ctdo.net" target="_blank" class="contact-card">
+                    <div class="contact-icon">👥</div>
+                    <div class="contact-label">Facebook Group</div>
+                    <div class="contact-value">CTDO.NET</div>
+                </a>
+            </div>
+            
+            <h3>Frequently Asked Questions</h3>
+            
+            <div class="highlight">
+                <strong>Q: How do I backup my data?</strong><br>
+                A: Your data is automatically included in iCloud device backups if enabled on your device.
+            </div>
+            
+            <div class="highlight">
+                <strong>Q: Can I transfer data to another device?</strong><br>
+                A: Use the Export feature to share your study sets as .vocaflip files, then import them on your new device.
+            </div>
+            
+            <div class="highlight">
+                <strong>Q: How do I import vocabulary?</strong><br>
+                A: VocaFlip supports multiple formats: TXT (word meaning per line), TSV, CSV, and JSON.
+            </div>
+            
+            <div class="highlight">
+                <strong>Q: Is there a limit on vocabulary sets?</strong><br>
+                A: No! Create unlimited folders and study sets with as many words as you need.
+            </div>
+            
+            <h3>Bug Reports</h3>
+            <p>Found a bug? Please email us at <a href="mailto:admin@ctdo.dev">admin@ctdo.dev</a> with:</p>
+            <ul>
+                <li>Device model and iOS version</li>
+                <li>Steps to reproduce the issue</li>
+                <li>Screenshots if applicable</li>
+            </ul>
+        </section>
+        
+        <section id="marketing" class="section">
+            <h2>✨ About VocaFlip</h2>
+            
+            <div class="highlight">
+                <h3 style="margin-top: 0;">Master Any Language, One Card at a Time</h3>
+                <p style="margin-bottom: 0;">VocaFlip is a powerful yet simple vocabulary learning app designed for students, language learners, and anyone who wants to expand their knowledge efficiently.</p>
+            </div>
+            
+            <h3>Key Features</h3>
+            <ul>
+                <li>📚 <strong>Multiple Study Modes</strong> - Flashcards, Multiple Choice, and Essay modes</li>
+                <li>📁 <strong>Organize with Folders</strong> - Group your study sets by topic, language, or subject</li>
+                <li>📊 <strong>Track Your Progress</strong> - Activity heatmap and detailed statistics</li>
+                <li>🌍 <strong>Multi-Language Support</strong> - English, Vietnamese, and Korean interface</li>
+                <li>🔊 <strong>Text-to-Speech</strong> - Hear correct pronunciation</li>
+                <li>📤 <strong>Import & Export</strong> - Support for TXT, CSV, TSV, JSON formats</li>
+                <li>🎨 <strong>Beautiful Design</strong> - Clean, modern UI with dark mode support</li>
+                <li>🔒 <strong>100% Offline</strong> - No account required, your data stays on your device</li>
+                <li>📱 <strong>Home Screen Widget</strong> - Track your study streak at a glance</li>
+            </ul>
+            
+            <h3>Perfect For</h3>
+            <ul>
+                <li>Language learners (Korean, Japanese, Chinese, English, etc.)</li>
+                <li>Students preparing for exams</li>
+                <li>Anyone memorizing terminology or definitions</li>
+                <li>Teachers creating study materials for students</li>
+            </ul>
+            
+            <h3>Why VocaFlip?</h3>
+            <p>Unlike other vocabulary apps, VocaFlip respects your privacy by keeping all data on your device. No subscriptions, no ads, no data collection. Just effective learning.</p>
+            
+            <h3>Developer</h3>
+            <p>VocaFlip is developed with ❤️ by <strong>DOTHANH1110</strong></p>
+            <span class="team-badge">🚀 CTDOTEAM</span>
+        </section>
+        
+        <footer>
+            <p>© 2026 VocaFlip by <a href="https://t.me/dothanh1110">DOTHANH1110</a> · <a href="https://www.facebook.com/groups/ctdo.net">CTDOTEAM</a></p>
+            <p style="margin-top: 8px;">Made with ❤️ for language learners everywhere</p>
+        </footer>
+    </div>
+    
+    <script>
+        function showSection(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            
+            document.getElementById(id).classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        if (window.location.hash) {
+            const section = window.location.hash.substring(1);
+            if (document.getElementById(section)) {
+                showSection(section);
+                document.querySelector(`[onclick="showSection('${section}')"]`).classList.add('active');
+                document.querySelector(`[onclick="showSection('privacy')"]`).classList.remove('active');
+            }
+        }
+    </script>
+</body>
+</html>
