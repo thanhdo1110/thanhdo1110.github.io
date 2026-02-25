@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnyAni — Hỗ Trợ & Chính Sách Bảo Mật</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --card: #141414;
+            --card-hover: #1a1a1a;
+            --border: #222;
+            --text: #e5e5e5;
+            --text-dim: #888;
+            --accent: #e50914;
+            --accent-glow: rgba(229, 9, 20, 0.3);
+            --blue: #3b82f6;
+            --green: #22c55e;
+            --purple: #a855f7;
+            --orange: #f97316;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--accent);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 20px;
+            transition: all 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #fff;
+            background: var(--card);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 140px 24px 80px;
+            text-align: center;
+            background: radial-gradient(ellipse at 50% 0%, var(--accent-glow) 0%, transparent 60%);
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 6vw, 56px);
+            font-weight: 900;
+            letter-spacing: -1.5px;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #fff 30%, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-dim);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Sections */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        .section-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 5px 14px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        .badge-docs {
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--blue);
+        }
+
+        .badge-support {
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--green);
+        }
+
+        .badge-privacy {
+            background: rgba(168, 85, 247, 0.15);
+            color: var(--purple);
+        }
+
+        .badge-choices {
+            background: rgba(249, 115, 22, 0.15);
+            color: var(--orange);
+        }
+
+        .badge-marketing {
+            background: rgba(229, 9, 20, 0.15);
+            color: var(--accent);
+        }
+
+        /* Single-page mode: hide non-targeted sections */
+        body.single-page .hero {
+            display: none;
+        }
+
+        body.single-page section {
+            display: none;
+        }
+
+        body.single-page section.active-section {
+            display: block;
+            padding-top: 100px;
+        }
+
+        body.single-page footer {
+            display: none;
+        }
+
+        section h2 {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+        }
+
+        section h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 32px 0 12px;
+            padding-top: 16px;
+        }
+
+        section p,
+        section li {
+            color: var(--text-dim);
+            font-size: 15px;
+        }
+
+        section ul,
+        section ol {
+            padding-left: 20px;
+            margin: 12px 0;
+        }
+
+        section li {
+            margin-bottom: 8px;
+        }
+
+        /* Step cards */
+        .step-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 16px 0;
+            transition: all 0.2s;
+        }
+
+        .step-card:hover {
+            background: var(--card-hover);
+            border-color: #333;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            color: #fff;
+            font-weight: 800;
+            font-size: 14px;
+            border-radius: 50%;
+            margin-bottom: 12px;
+        }
+
+        .step-card h4 {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .step-card p {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Code block */
+        code {
+            background: #1e1e2e;
+            color: var(--accent);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+        }
+
+        /* Info box */
+        .info-box {
+            background: rgba(59, 130, 246, 0.08);
+            border-left: 3px solid var(--blue);
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 20px 0;
+        }
+
+        .info-box p {
+            color: #a0b8d8;
+            font-size: 14px;
+        }
+
+        .info-box strong {
+            color: var(--blue);
+        }
+
+        .warn-box {
+            background: rgba(249, 115, 22, 0.08);
+            border-left: 3px solid var(--orange);
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 20px 0;
+        }
+
+        .warn-box p {
+            color: #d4a574;
+            font-size: 14px;
+        }
+
+        .warn-box strong {
+            color: var(--orange);
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th,
+        td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+        }
+
+        th {
+            color: var(--text-dim);
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        td {
+            color: var(--text);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        footer p {
+            color: var(--text-dim);
+            font-size: 13px;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .nav-links {
+                gap: 4px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+                padding: 5px 10px;
+            }
+
+            section {
+                padding: 48px 0;
+            }
+
+            section h2 {
+                font-size: 24px;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Anchor offset for fixed nav */
+        section[id] {
+            scroll-margin-top: 80px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">AnyAni</a>
+            <div class="nav-links">
+                <a href="index.html?=Marketing">Marketing</a>
+                <a href="index.html?=Docs">Hướng dẫn</a>
+                <a href="index.html?=Support">Hỗ trợ</a>
+                <a href="index.html?=Privacy">Bảo mật</a>
+                <a href="index.html?=Choices">Quyền riêng tư</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>AnyAni</h1>
+        <p>Thư viện video cá nhân — Lưu giữ khoảnh khắc quý giá của bạn trên một giao diện chuyên nghiệp, hoàn toàn
+            offline.</p>
+    </div>
+
+    <div class="container">
+
+        <!-- ========== MARKETING ========== -->
+        <section id="marketing">
+            <span class="section-badge badge-marketing">Marketing</span>
+            <h2>AnyAni — Thư Viện Video Cá Nhân</h2>
+            <p>Biến điện thoại của bạn thành một thư viện phim kỉ niệm riêng tư, được thiết kế với giao diện chuyên
+                nghiệp kiểu Netflix.</p>
+
+            <h3>✨ Điểm Nổi Bật</h3>
+
+            <div class="step-card">
+                <h4>📱 Giao Diện Chuyên Nghiệp</h4>
+                <p>Trải nghiệm giao diện dark mode đẹp mắt với Hero Banner xoay tự động, danh mục phân loại, tìm kiếm
+                    thông minh và đề xuất ngẫu nhiên — giống hệt các ứng dụng streaming hàng đầu.</p>
+            </div>
+
+            <div class="step-card">
+                <h4>🔒 100% Offline & Riêng Tư</h4>
+                <p>Mọi dữ liệu được lưu trữ hoàn toàn trên thiết bị. Không theo dõi, không quảng cáo, không thu thập dữ
+                    liệu cá nhân. Quyền riêng tư tuyệt đối.</p>
+            </div>
+
+            <div class="step-card">
+                <h4>🎬 Trình Phát Video Tích Hợp</h4>
+                <p>Phát video bằng AVPlayer tốc độ cao với hỗ trợ Picture-in-Picture. Tự động ghi nhớ vị trí đang xem để
+                    tiếp tục bất cứ lúc nào.</p>
+            </div>
+
+            <div class="step-card">
+                <h4>📂 Quản Lý Thông Minh</h4>
+                <p>Phân loại video theo danh mục tuỳ chỉnh: Kỉ niệm, Gia đình, Du lịch, Sự kiện... Thêm ảnh bìa, banner,
+                    mô tả cho mỗi bộ sưu tập.</p>
+            </div>
+
+            <h3>📲 Tính Năng Chính</h3>
+            <ul>
+                <li>Nhập video và hình ảnh từ Thư viện Ảnh iOS</li>
+                <li>Tạo bộ sưu tập với ảnh bìa và banner tuỳ chỉnh</li>
+                <li>Phân loại phim theo danh mục không giới hạn</li>
+                <li>Tìm kiếm nhanh theo tiêu đề</li>
+                <li>Đề xuất ngẫu nhiên từ thư viện cá nhân</li>
+                <li>Ghi nhớ tiến độ xem tự động</li>
+                <li>Giao diện tối (Dark Mode) thân thiện với mắt</li>
+                <li>Hỗ trợ đa ngôn ngữ (Tiếng Việt)</li>
+            </ul>
+
+            <div class="info-box">
+                <p><strong>Miễn phí hoàn toàn.</strong> Không có giao dịch mua trong ứng dụng. Không có quảng cáo. Không
+                    có đăng ký thuê bao.</p>
+            </div>
+
+            <h3>🏷️ Promotional Text</h3>
+            <div class="step-card">
+                <p style="font-size: 16px; font-weight: 600; color: var(--text);">Lưu giữ khoảnh khắc quý giá. AnyAni
+                    giúp bạn xây dựng thư viện phim cá nhân – sắp xếp theo danh mục, phát trực tiếp, hoàn toàn offline.
+                </p>
+            </div>
+        </section>
+
+        <!-- ========== DOCS ========== -->
+        <section id="docs">
+            <span class="section-badge badge-docs">Hướng dẫn sử dụng</span>
+            <h2>Tạo & Quản Lý Thư Viện</h2>
+            <p>AnyAni cho phép bạn xây dựng thư viện video cá nhân trực tiếp trên thiết bị iOS. Dưới đây là hướng dẫn
+                chi tiết.</p>
+
+            <h3>🎬 Thêm Phim Mới</h3>
+
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h4>Mở Trang chủ</h4>
+                <p>Khởi động ứng dụng AnyAni. Giao diện Trang chủ sẽ hiển thị thư viện hiện tại của bạn. Nếu đây là lần
+                    đầu, màn hình sẽ trống.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h4>Nhấn nút <code>+</code></h4>
+                <p>Ở góc phải phía trên màn hình Trang chủ, nhấn vào nút <strong style="color:var(--accent);">+</strong>
+                    (hình tròn đỏ) để mở giao diện thêm phim mới.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h4>Điền thông tin</h4>
+                <p>Nhập <strong>Tên phim</strong>, <strong>Danh mục</strong> (ví dụ: Kỉ niệm, Gia đình, Du lịch),
+                    <strong>Năm</strong>, và <strong>Mô tả</strong>. Chọn ảnh bìa (Cover) từ Thư viện Ảnh của bạn.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h4>Thêm tập phim</h4>
+                <p>Nhấn nút <strong style="color:var(--blue);">+</strong> trong mục "Danh sách tập" để thêm từng tập.
+                    Mỗi tập gồm một video từ Thư viện Ảnh và tên tập tuỳ chỉnh.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">5</div>
+                <h4>Lưu & Xem</h4>
+                <p>Nhấn <strong>Lưu</strong>. Phim sẽ xuất hiện trên Trang chủ — với ảnh bìa, danh mục, và banner. Nhấn
+                    vào phim để xem chi tiết và phát video.</p>
+            </div>
+
+            <h3>🔗 Cấu Hình Nguồn Bên Ngoài (Tuỳ chọn)</h3>
+            <p>Bạn có thể nhập dữ liệu từ nguồn bên ngoài bằng cách cấu hình URL trong mục <strong>Hồ sơ</strong>.</p>
+
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h4>Mở tab Hồ sơ</h4>
+                <p>Chuyển sang tab <strong>Hồ sơ</strong> ở thanh điều hướng phía dưới.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h4>Nhấn vào biểu tượng avatar</h4>
+                <p>Một hộp thoại sẽ xuất hiện cho phép bạn nhập URL nguồn. Ví dụ: <code>https://ctdo.dev</code></p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h4>Lưu & Khởi động lại</h4>
+                <p>Nhấn <strong>Lưu</strong>, sau đó khởi động lại ứng dụng để áp dụng nguồn mới. Để trở về chế độ
+                    Offline, chỉ cần xoá URL và nhấn Lưu.</p>
+            </div>
+
+            <div class="info-box">
+                <p><strong>Lưu ý:</strong> Khi thay đổi hoặc xoá nguồn, tất cả lịch sử xem và bộ nhớ cache từ nguồn cũ
+                    sẽ được xoá sạch để bảo vệ quyền riêng tư. Thư viện Offline của bạn được giữ nguyên.</p>
+            </div>
+
+            <h3>📂 Quản Lý Danh Mục</h3>
+            <p>Khi thêm phim, bạn có thể gán danh mục tuỳ ý. Các phim cùng danh mục sẽ tự động nhóm lại thành các hàng
+                riêng trên Trang chủ.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Danh mục</th>
+                        <th>Hiệu ứng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>Nổi Bật</code></td>
+                        <td>Hiển thị trên Hero Banner xoay lớn ở đầu trang</td>
+                    </tr>
+                    <tr>
+                        <td><code>Phim Của Tôi</code></td>
+                        <td>Danh mục mặc định (nếu không điền gì)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tuỳ chỉnh</strong></td>
+                        <td>Bất kỳ tên nào: Gia đình, Du lịch, Kỉ niệm, v.v.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ========== SUPPORT ========== -->
+        <section id="support">
+            <span class="section-badge badge-support">Hỗ trợ</span>
+            <h2>Trung Tâm Hỗ Trợ</h2>
+            <p>Nếu bạn gặp vấn đề khi sử dụng AnyAni, vui lòng tham khảo các câu hỏi thường gặp bên dưới hoặc liên hệ
+                trực tiếp với đội ngũ phát triển.</p>
+
+            <h3>❓ Câu Hỏi Thường Gặp</h3>
+
+            <div class="step-card">
+                <h4>Video không phát được?</h4>
+                <p>Đảm bảo rằng video đã được nhập từ thư viện ảnh thành công. AnyAni hỗ trợ định dạng <code>.mp4</code>
+                    và <code>.mov</code>. Một số video từ ứng dụng bên thứ ba có thể sử dụng codec không tương thích.
+                </p>
+            </div>
+
+            <div class="step-card">
+                <h4>Ảnh bìa không hiển thị?</h4>
+                <p>Hãy đảm bảo bạn đã cấp quyền truy cập Thư viện Ảnh cho AnyAni thông qua <strong>Cài đặt → AnyAni →
+                        Ảnh</strong>.</p>
+            </div>
+
+            <div class="step-card">
+                <h4>Dữ liệu bị mất sau khi thay đổi nguồn?</h4>
+                <p>Đây là hành vi dự kiến. Khi thay đổi nguồn, lịch sử xem và bộ nhớ cache của nguồn cũ sẽ bị xoá để đảm
+                    bảo quyền riêng tư. Thư viện phim Offline do bạn tự tạo <strong>không bị ảnh hưởng</strong>.</p>
+            </div>
+
+            <div class="step-card">
+                <h4>Dung lượng ứng dụng tăng?</h4>
+                <p>Các video bạn nhập vào AnyAni được sao chép vào bộ nhớ nội bộ của ứng dụng. Để giải phóng dung lượng,
+                    bạn có thể xoá các phim không còn cần thiết từ mục quản lý trong ứng dụng.</p>
+            </div>
+
+            <h3>📧 Liên Hệ Hỗ Trợ</h3>
+            <p>Nếu bạn vẫn cần trợ giúp, hãy liên hệ qua:</p>
+            <ul>
+                <li><strong>Telegram:</strong> <a href="https://t.me/dothanh1110"
+                        style="color:var(--blue);">@dothanh1110</a></li>
+                <li><strong>Email:</strong> <a href="mailto:support@ctdo.dev"
+                        style="color:var(--blue);">support@ctdo.dev</a></li>
+            </ul>
+
+            <div class="info-box">
+                <p><strong>Thời gian phản hồi:</strong> Chúng tôi sẽ cố gắng trả lời trong vòng 24 giờ làm việc.</p>
+            </div>
+        </section>
+
+        <!-- ========== PRIVACY POLICY ========== -->
+        <section id="privacy">
+            <span class="section-badge badge-privacy">Privacy Policy</span>
+            <h2>Chính Sách Bảo Mật</h2>
+            <p><strong>Cập nhật lần cuối:</strong> 25 tháng 2, 2026</p>
+
+            <h3>1. Giới Thiệu</h3>
+            <p>AnyAni ("Ứng dụng", "chúng tôi") cam kết bảo vệ quyền riêng tư của người dùng. Chính sách này mô tả cách
+                chúng tôi xử lý thông tin khi bạn sử dụng ứng dụng AnyAni trên iOS.</p>
+
+            <h3>2. Dữ Liệu Chúng Tôi Thu Thập</h3>
+            <p><strong>Chúng tôi không thu thập bất kỳ dữ liệu cá nhân nào.</strong></p>
+            <ul>
+                <li>Không thu thập thông tin nhận dạng cá nhân (tên, email, số điện thoại).</li>
+                <li>Không thu thập dữ liệu vị trí.</li>
+                <li>Không sử dụng cookie theo dõi hoặc IDFA.</li>
+                <li>Không tích hợp SDK phân tích bên thứ ba (Google Analytics, Firebase, v.v.).</li>
+                <li>Không tích hợp SDK quảng cáo.</li>
+            </ul>
+
+            <h3>3. Lưu Trữ Dữ Liệu</h3>
+            <p>Tất cả dữ liệu do người dùng tạo (video, hình ảnh, tiêu đề, mô tả) được lưu trữ <strong>hoàn toàn cục
+                    bộ</strong> trên thiết bị iOS của bạn, trong thư mục Document Directory được bảo vệ bởi sandbox của
+                hệ điều hành iOS.</p>
+            <ul>
+                <li>Không có dữ liệu nào được tải lên máy chủ của chúng tôi hoặc bất kỳ bên thứ ba nào.</li>
+                <li>Dữ liệu được mã hoá bởi iOS Data Protection khi thiết bị bị khoá.</li>
+                <li>Xoá ứng dụng sẽ xoá vĩnh viễn tất cả dữ liệu liên quan.</li>
+            </ul>
+
+            <h3>4. Quyền Truy Cập</h3>
+            <p>AnyAni chỉ yêu cầu các quyền sau:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Quyền</th>
+                        <th>Mục đích</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Thư viện Ảnh</td>
+                        <td>Để người dùng chọn video và hình ảnh nhập vào thư viện cá nhân</td>
+                    </tr>
+                    <tr>
+                        <td>Mạng Internet</td>
+                        <td>Chỉ khi người dùng tự cấu hình nguồn bên ngoài (tuỳ chọn)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>5. Nguồn Bên Ngoài</h3>
+            <p>AnyAni cung cấp tính năng tuỳ chọn cho phép người dùng nhập URL nguồn bên ngoài. Khi sử dụng tính năng
+                này:</p>
+            <ul>
+                <li>Ứng dụng sẽ kết nối đến URL do người dùng cung cấp.</li>
+                <li>Chúng tôi không kiểm soát nội dung từ các nguồn bên ngoài.</li>
+                <li>Khi gỡ bỏ nguồn, tất cả dữ liệu cache từ nguồn đó sẽ bị xoá hoàn toàn.</li>
+            </ul>
+
+            <h3>6. Bảo Mật Truyền Tải</h3>
+            <p>Khi kết nối mạng (chỉ xảy ra nếu người dùng cấu hình nguồn bên ngoài), ứng dụng sử dụng giao thức TLS 1.3
+                để mã hoá toàn bộ dữ liệu truyền tải.</p>
+
+            <h3>7. Trẻ Em</h3>
+            <p>AnyAni không thu thập thông tin từ trẻ em dưới 13 tuổi. Ứng dụng không yêu cầu đăng ký tài khoản và không
+                thu thập bất kỳ thông tin cá nhân nào.</p>
+
+            <h3>8. Thay Đổi Chính Sách</h3>
+            <p>Chúng tôi có quyền cập nhật chính sách này. Mọi thay đổi sẽ được phản ánh trên trang này với ngày cập
+                nhật mới.</p>
+
+            <h3>9. Liên Hệ</h3>
+            <p>Nếu bạn có câu hỏi về chính sách bảo mật, vui lòng liên hệ:</p>
+            <ul>
+                <li><strong>Email:</strong> <a href="mailto:support@ctdo.dev"
+                        style="color:var(--blue);">support@ctdo.dev</a></li>
+                <li><strong>Telegram:</strong> <a href="https://t.me/dothanh1110"
+                        style="color:var(--blue);">@dothanh1110</a></li>
+            </ul>
+        </section>
+
+        <!-- ========== USER PRIVACY CHOICES ========== -->
+        <section id="choices">
+            <span class="section-badge badge-choices">User Privacy Choices</span>
+            <h2>Quyền Riêng Tư Của Bạn</h2>
+            <p>AnyAni tôn trọng tuyệt đối quyền riêng tư và quyền lựa chọn của người dùng. Dưới đây là các quyền bạn có:
+            </p>
+
+            <h3>🛡️ Quyền Kiểm Soát Dữ Liệu</h3>
+
+            <div class="step-card">
+                <h4>Xoá toàn bộ dữ liệu</h4>
+                <p>Bạn có thể xoá tất cả dữ liệu ứng dụng (lịch sử xem, danh sách yêu thích, bộ nhớ cache) bất cứ lúc
+                    nào bằng cách nhấn nút <strong style="color:var(--accent);">"Xoá tất cả dữ liệu"</strong> trong tab
+                    Hồ sơ.</p>
+            </div>
+
+            <div class="step-card">
+                <h4>Xoá thư viện Offline</h4>
+                <p>Các phim do bạn tự thêm có thể được xoá riêng lẻ từ giao diện quản lý hoặc bằng cách gỡ cài đặt ứng
+                    dụng.</p>
+            </div>
+
+            <div class="step-card">
+                <h4>Từ chối kết nối mạng</h4>
+                <p>Bạn hoàn toàn có quyền sử dụng AnyAni mà không cần kết nối Internet. Mặc định, ứng dụng hoạt động ở
+                    chế độ Offline và <strong>không thực hiện bất kỳ kết nối nào</strong> trừ khi bạn tự cấu hình nguồn.
+                </p>
+            </div>
+
+            <div class="step-card">
+                <h4>Gỡ bỏ nguồn bên ngoài</h4>
+                <p>Nếu bạn đã cấu hình nguồn bên ngoài và muốn trở về chế độ Offline: mở tab Hồ sơ → nhấn avatar → xoá
+                    URL → nhấn Lưu. Tất cả dữ liệu từ nguồn cũ sẽ bị xoá vĩnh viễn.</p>
+            </div>
+
+            <h3>📋 Tóm Tắt</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Hạng mục</th>
+                        <th>Trạng thái</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Thu thập dữ liệu cá nhân</td>
+                        <td>❌ Không</td>
+                    </tr>
+                    <tr>
+                        <td>Theo dõi người dùng (Tracking)</td>
+                        <td>❌ Không</td>
+                    </tr>
+                    <tr>
+                        <td>Quảng cáo</td>
+                        <td>❌ Không</td>
+                    </tr>
+                    <tr>
+                        <td>Chia sẻ dữ liệu với bên thứ ba</td>
+                        <td>❌ Không</td>
+                    </tr>
+                    <tr>
+                        <td>Lưu trữ cục bộ trên thiết bị</td>
+                        <td>✅ Có</td>
+                    </tr>
+                    <tr>
+                        <td>Mã hoá TLS khi kết nối</td>
+                        <td>✅ Có (TLS 1.3)</td>
+                    </tr>
+                    <tr>
+                        <td>Người dùng tự kiểm soát dữ liệu</td>
+                        <td>✅ Hoàn toàn</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="warn-box">
+                <p><strong>Quan trọng:</strong> AnyAni không bao giờ bán, chia sẻ hoặc chuyển giao dữ liệu người dùng
+                    cho bất kỳ bên thứ ba nào dưới mọi hình thức.</p>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>© 2026 AnyAni. Built with ❤️ by CTDOTEAM.</p>
+        <p style="margin-top: 8px;">
+            <a href="index.html?=Marketing" style="color:var(--text-dim); margin: 0 12px;">Marketing</a>
+            <a href="index.html?=Docs" style="color:var(--text-dim); margin: 0 12px;">Hướng dẫn</a>
+            <a href="index.html?=Support" style="color:var(--text-dim); margin: 0 12px;">Hỗ trợ</a>
+            <a href="index.html?=Privacy" style="color:var(--text-dim); margin: 0 12px;">Bảo mật</a>
+            <a href="index.html?=Choices" style="color:var(--text-dim); margin: 0 12px;">Quyền riêng tư</a>
+        </p>
+    </footer>
+
+    <script>
+        // Query parameter routing: index.html?=Marketing → show only #marketing
+        const pageMap = {
+            'Marketing': 'marketing',
+            'Docs': 'docs',
+            'Support': 'support',
+            'Privacy': 'privacy',
+            'Choices': 'choices'
+        };
+
+        function routePage() {
+            const raw = window.location.search; // e.g. "?=Marketing"
+            const param = raw.replace('?=', '').replace('?', '');
+
+            if (param && pageMap[param]) {
+                // Single-page mode: show only the targeted section
+                document.body.classList.add('single-page');
+                const targetId = pageMap[param];
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.classList.add('active-section');
+                }
+                // Update page title
+                document.title = 'AnyAni — ' + param;
+                // Highlight the active nav link
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    if (link.href.includes('?=' + param)) {
+                        link.classList.add('active');
+                    }
+                });
+            } else {
+                // Full page mode: show everything, scroll highlight
+                const allSections = document.querySelectorAll('section[id]');
+                const navLinks = document.querySelectorAll('.nav-links a');
+
+                window.addEventListener('scroll', () => {
+                    let current = '';
+                    allSections.forEach(section => {
+                        const sectionTop = section.offsetTop - 100;
+                        if (pageYOffset >= sectionTop) {
+                            current = section.getAttribute('id');
+                        }
+                    });
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        const href = link.getAttribute('href');
+                        // Match either ?=Key or #id
+                        for (const [key, id] of Object.entries(pageMap)) {
+                            if (href.includes('?=' + key) && id === current) {
+                                link.classList.add('active');
+                            }
+                        }
+                    });
+                });
+            }
+        }
+
+        routePage();
+    </script>
+
+</body>
+
+</html>
