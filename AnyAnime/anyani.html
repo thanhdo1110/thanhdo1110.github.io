@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnyAnime - Xem Anime Online</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        header {
+            background: linear-gradient(180deg, rgba(0, 0, 0, .9) 0%, transparent 100%);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px
+        }
+
+        header .logo {
+            font-size: 28px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #e50914, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent
+        }
+
+        header nav {
+            display: flex;
+            gap: 20px;
+            margin-left: auto
+        }
+
+        header nav a {
+            font-size: 14px;
+            color: #aaa;
+            transition: color .2s
+        }
+
+        header nav a:hover {
+            color: #fff
+        }
+
+        .hero {
+            position: relative;
+            height: 70vh;
+            min-height: 500px;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('https://picsum.photos/seed/hero_anime/1600/900') center/cover no-repeat
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg, #0a0a0a 0%, rgba(10, 10, 10, .6) 40%, rgba(10, 10, 10, .2) 100%)
+        }
+
+        .hero-content {
+            position: relative;
+            padding: 40px 48px 60px;
+            max-width: 600px
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, .5)
+        }
+
+        .hero-content p {
+            color: #bbb;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 24px
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 12px
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all .2s
+        }
+
+        .btn-primary {
+            background: #fff;
+            color: #000
+        }
+
+        .btn-primary:hover {
+            background: #e0e0e0
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, .2);
+            color: #fff;
+            backdrop-filter: blur(4px)
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, .3)
+        }
+
+        .section {
+            padding: 32px 24px
+        }
+
+        .section h2 {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .section h2 .badge {
+            font-size: 11px;
+            background: #e50914;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 600
+        }
+
+        .row {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            padding-bottom: 16px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch
+        }
+
+        .row::-webkit-scrollbar {
+            display: none
+        }
+
+        .card {
+            flex: 0 0 180px;
+            scroll-snap-align: start;
+            transition: transform .3s, box-shadow .3s;
+            cursor: pointer;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 32px rgba(229, 9, 20, .3)
+        }
+
+        .card img {
+            width: 100%;
+            aspect-ratio: 2/3;
+            object-fit: cover;
+            display: block;
+            border-radius: 8px
+        }
+
+        .card .info {
+            padding: 8px 4px
+        }
+
+        .card .info h3 {
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis
+        }
+
+        .card .info .meta {
+            font-size: 11px;
+            color: #888;
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        .card .info .meta .star {
+            color: #f5c518
+        }
+
+        .card .ep-badge {
+            position: absolute;
+            top: 8px;
+            left: 0;
+            background: #e50914;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 0 4px 4px 0
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 16px
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 24px;
+            border-top: 1px solid #1a1a1a;
+            color: #555;
+            font-size: 13px
+        }
+
+        footer a {
+            color: #e50914
+        }
+
+        .disclaimer {
+            max-width: 700px;
+            margin: 20px auto 0;
+            text-align: left;
+            color: #444;
+            font-size: 11px;
+            line-height: 1.8
+        }
+
+        @media(max-width:768px) {
+            .hero-content h1 {
+                font-size: 32px
+            }
+
+            .card {
+                flex: 0 0 140px
+            }
+
+            header nav {
+                display: none
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">AnyAnime</div>
+        <nav>
+            <a href="#featured">Nổi Bật</a>
+            <a href="#new">Mới Cập Nhật</a>
+            <a href="#popular">Phổ Biến</a>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Hành Trình Phiêu Lưu</h1>
+            <p>Câu chuyện về một chàng trai trẻ bắt đầu cuộc hành trình phiêu lưu qua những vùng đất bí ẩn, gặp gỡ những
+                người bạn đồng hành và đối mặt với nhiều thử thách.</p>
+            <div class="hero-btns">
+                <button class="btn btn-primary">▶ Xem Ngay</button>
+                <button class="btn btn-secondary">+ Danh Sách</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="app-sections"></div>
+
+    <footer>
+        <p>© 2026 AnyAnime. Powered by <a href="#">CTDOTEAM</a></p>
+        <div class="disclaimer">
+            <p>• Dữ liệu Website: Demo content — Hình ảnh và video mẫu được sử dụng cho mục đích trình diễn.</p>
+            <p>• Ứng dụng AnyAnime: Được phát triển bởi Nguyen Huy & CTDOTEAM.</p>
+        </div>
+    </footer>
+
+    <!--
+  API DATA — iOS app reads this JSON block
+  All anime data is embedded here for static hosting (GitHub Pages)
+-->
+    <script id="api-data" type="application/json">
+{
+  "sections": [
+    {
+      "title": "Nổi Bật",
+      "items": [
+        {"id":"demo-1","title":"Hành Trình Phiêu Lưu","posterURL":"https://picsum.photos/seed/anime1/300/450","detailURL":"demo-1","episodeText":"Tập 12","rating":"8.5"},
+        {"id":"demo-2","title":"Kiếm Sĩ Huyền Thoại","posterURL":"https://picsum.photos/seed/anime2/300/450","detailURL":"demo-2","episodeText":"Tập 24","rating":"9.1"},
+        {"id":"demo-3","title":"Thế Giới Ma Thuật","posterURL":"https://picsum.photos/seed/anime3/300/450","detailURL":"demo-3","episodeText":"Tập 8","rating":"7.9"},
+        {"id":"demo-4","title":"Đấu Sĩ Vũ Trụ","posterURL":"https://picsum.photos/seed/anime4/300/450","detailURL":"demo-4","episodeText":"Tập 36","rating":"9.3"},
+        {"id":"demo-5","title":"Trái Tim Dũng Cảm","posterURL":"https://picsum.photos/seed/anime5/300/450","detailURL":"demo-5","episodeText":"Tập 16","rating":"8.7"}
+      ]
+    },
+    {
+      "title": "Mới Cập Nhật",
+      "items": [
+        {"id":"demo-6","title":"Học Viện Siêu Năng","posterURL":"https://picsum.photos/seed/anime6/300/450","detailURL":"demo-6","episodeText":"Tập 20","rating":"8.2"},
+        {"id":"demo-7","title":"Vương Quốc Long Tộc","posterURL":"https://picsum.photos/seed/anime7/300/450","detailURL":"demo-7","episodeText":"Tập 10","rating":"7.5"},
+        {"id":"demo-8","title":"Thiên Sứ Bóng Đêm","posterURL":"https://picsum.photos/seed/anime8/300/450","detailURL":"demo-8","episodeText":"Tập 14","rating":"8.9"},
+        {"id":"demo-9","title":"Hải Tặc Đại Dương","posterURL":"https://picsum.photos/seed/anime9/300/450","detailURL":"demo-9","episodeText":"Tập 50","rating":"9.5"},
+        {"id":"demo-10","title":"Ninja Làng Lá","posterURL":"https://picsum.photos/seed/anime10/300/450","detailURL":"demo-10","episodeText":"Tập 30","rating":"9.0"}
+      ]
+    },
+    {
+      "title": "Phổ Biến",
+      "items": [
+        {"id":"demo-11","title":"Siêu Nhân Titan","posterURL":"https://picsum.photos/seed/anime11/300/450","detailURL":"demo-11","episodeText":"Tập 25","rating":"9.4"},
+        {"id":"demo-12","title":"Pháp Sư Lửa","posterURL":"https://picsum.photos/seed/anime12/300/450","detailURL":"demo-12","episodeText":"Tập 18","rating":"8.1"},
+        {"id":"demo-13","title":"Quái Vật Thời Gian","posterURL":"https://picsum.photos/seed/anime13/300/450","detailURL":"demo-13","episodeText":"Tập 6","rating":"7.8"},
+        {"id":"demo-14","title":"Chiến Binh Ánh Sáng","posterURL":"https://picsum.photos/seed/anime14/300/450","detailURL":"demo-14","episodeText":"Tập 22","rating":"8.6"},
+        {"id":"demo-15","title":"Lãng Khách Cô Đơn","posterURL":"https://picsum.photos/seed/anime15/300/450","detailURL":"demo-15","episodeText":"Tập 28","rating":"9.2"}
+      ]
+    },
+    {
+      "title": "Hoàn Thành",
+      "items": [
+        {"id":"demo-1","title":"Hành Trình Phiêu Lưu","posterURL":"https://picsum.photos/seed/anime1/300/450","detailURL":"demo-1","episodeText":"Tập 12","rating":"8.5"},
+        {"id":"demo-4","title":"Đấu Sĩ Vũ Trụ","posterURL":"https://picsum.photos/seed/anime4/300/450","detailURL":"demo-4","episodeText":"Tập 36","rating":"9.3"},
+        {"id":"demo-9","title":"Hải Tặc Đại Dương","posterURL":"https://picsum.photos/seed/anime9/300/450","detailURL":"demo-9","episodeText":"Tập 50","rating":"9.5"},
+        {"id":"demo-11","title":"Siêu Nhân Titan","posterURL":"https://picsum.photos/seed/anime11/300/450","detailURL":"demo-11","episodeText":"Tập 25","rating":"9.4"}
+      ]
+    },
+    {
+      "title": "Đề Xuất Cho Bạn",
+      "items": [
+        {"id":"demo-3","title":"Thế Giới Ma Thuật","posterURL":"https://picsum.photos/seed/anime3/300/450","detailURL":"demo-3","episodeText":"Tập 8","rating":"7.9"},
+        {"id":"demo-5","title":"Trái Tim Dũng Cảm","posterURL":"https://picsum.photos/seed/anime5/300/450","detailURL":"demo-5","episodeText":"Tập 16","rating":"8.7"},
+        {"id":"demo-8","title":"Thiên Sứ Bóng Đêm","posterURL":"https://picsum.photos/seed/anime8/300/450","detailURL":"demo-8","episodeText":"Tập 14","rating":"8.9"},
+        {"id":"demo-10","title":"Ninja Làng Lá","posterURL":"https://picsum.photos/seed/anime10/300/450","detailURL":"demo-10","episodeText":"Tập 30","rating":"9.0"},
+        {"id":"demo-12","title":"Pháp Sư Lửa","posterURL":"https://picsum.photos/seed/anime12/300/450","detailURL":"demo-12","episodeText":"Tập 18","rating":"8.1"},
+        {"id":"demo-15","title":"Lãng Khách Cô Đơn","posterURL":"https://picsum.photos/seed/anime15/300/450","detailURL":"demo-15","episodeText":"Tập 28","rating":"9.2"}
+      ]
+    }
+  ],
+  "details": {
+    "demo-1": {
+      "bannerURL":"https://picsum.photos/seed/banner_demo1/800/400",
+      "description":"Câu chuyện về một chàng trai trẻ bắt đầu cuộc hành trình phiêu lưu qua những vùng đất bí ẩn, gặp gỡ những người bạn đồng hành và đối mặt với nhiều thử thách để tìm ra sức mạnh thực sự của bản thân.",
+      "episodes":[{"title":"Tập 1","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"},{"title":"Tập 2","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"},{"title":"Tập 3","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"},{"title":"Tập 4","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"},{"title":"Tập 5","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"},{"title":"Tập 6","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"},{"title":"Tập 7","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4"},{"title":"Tập 8","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"},{"title":"Tập 9","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4"},{"title":"Tập 10","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"},{"title":"Tập 11","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"},{"title":"Tập 12","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"}],
+      "seasons":[],
+      "relatedAnime":[{"id":"demo-2","title":"Kiếm Sĩ Huyền Thoại","posterURL":"https://picsum.photos/seed/anime2/300/450","detailURL":"demo-2","episodeText":"Tập 24","rating":"9.1"},{"id":"demo-5","title":"Trái Tim Dũng Cảm","posterURL":"https://picsum.photos/seed/anime5/300/450","detailURL":"demo-5","episodeText":"Tập 16","rating":"8.7"},{"id":"demo-9","title":"Hải Tặc Đại Dương","posterURL":"https://picsum.photos/seed/anime9/300/450","detailURL":"demo-9","episodeText":"Tập 50","rating":"9.5"}],
+      "viewCount":"125,430","ratingScore":"8.5","ratingCount":"2340","year":"2026","status":"Đang chiếu","genres":"Hành Động, Phiêu Lưu, Viễn Tưởng","director":"AnyAni Studio","country":"Nhật Bản","followers":"5200","duration":"24 phút/tập","quality":"Full HD","ratingLimit":"PG-13","language":"Vietsub","studio":"AnyAni Studio",
+      "characters":[{"name":"Ryu - Nhân Vật Chính","imageURL":"https://picsum.photos/seed/char1_d1/200/200"},{"name":"Sakura - Đồng Đội","imageURL":"https://picsum.photos/seed/char2_d1/200/200"},{"name":"Dark Lord - Phản Diện","imageURL":"https://picsum.photos/seed/char3_d1/200/200"}],
+      "photos":["https://picsum.photos/seed/p1_d1/600/400","https://picsum.photos/seed/p2_d1/600/400","https://picsum.photos/seed/p3_d1/600/400"]
+    },
+    "demo-2": {
+      "bannerURL":"https://picsum.photos/seed/banner_demo2/800/400",
+      "description":"Trong một thế giới nơi thanh kiếm quyết định tất cả, một kiếm sĩ trẻ tuổi phải rèn luyện kỹ năng chiến đấu để bảo vệ những người mình yêu thương và trở thành huyền thoại.",
+      "episodes":[{"title":"Tập 1","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"},{"title":"Tập 2","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"},{"title":"Tập 3","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"},{"title":"Tập 4","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"},{"title":"Tập 5","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"},{"title":"Tập 6","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"}],
+      "seasons":[],"relatedAnime":[{"id":"demo-1","title":"Hành Trình Phiêu Lưu","posterURL":"https://picsum.photos/seed/anime1/300/450","detailURL":"demo-1","episodeText":"Tập 12","rating":"8.5"},{"id":"demo-4","title":"Đấu Sĩ Vũ Trụ","posterURL":"https://picsum.photos/seed/anime4/300/450","detailURL":"demo-4","episodeText":"Tập 36","rating":"9.3"}],
+      "viewCount":"89,200","ratingScore":"9.1","ratingCount":"1890","year":"2026","status":"Đang chiếu","genres":"Hành Động, Kiếm Hiệp","director":"AnyAni Studio","country":"Nhật Bản","followers":"4100","duration":"24 phút/tập","quality":"Full HD","ratingLimit":"PG-13","language":"Vietsub","studio":"AnyAni Studio",
+      "characters":[{"name":"Ken - Kiếm Sĩ","imageURL":"https://picsum.photos/seed/char1_d2/200/200"},{"name":"Hana - Pháp Sư","imageURL":"https://picsum.photos/seed/char2_d2/200/200"}],
+      "photos":["https://picsum.photos/seed/p1_d2/600/400","https://picsum.photos/seed/p2_d2/600/400"]
+    },
+    "demo-3": {
+      "bannerURL":"https://picsum.photos/seed/banner_demo3/800/400",
+      "description":"Một cô gái bình thường bất ngờ phát hiện mình có khả năng phép thuật đặc biệt. Cô được mời vào Học Viện Ma Thuật và bắt đầu cuộc sống mới đầy kỳ diệu.",
+      "episodes":[{"title":"Tập 1","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"},{"title":"Tập 2","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"},{"title":"Tập 3","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"},{"title":"Tập 4","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"}],
+      "seasons":[],"relatedAnime":[{"id":"demo-6","title":"Học Viện Siêu Năng","posterURL":"https://picsum.photos/seed/anime6/300/450","detailURL":"demo-6","episodeText":"Tập 20","rating":"8.2"}],
+      "viewCount":"67,800","ratingScore":"7.9","ratingCount":"1200","year":"2026","status":"Đang chiếu","genres":"Phép Thuật, Phiêu Lưu, Học Đường","director":"AnyAni Studio","country":"Nhật Bản","followers":"3400","duration":"24 phút/tập","quality":"Full HD","ratingLimit":"PG","language":"Vietsub","studio":"AnyAni Studio",
+      "characters":[{"name":"Yuki - Pháp Sư Trẻ","imageURL":"https://picsum.photos/seed/char1_d3/200/200"}],
+      "photos":["https://picsum.photos/seed/p1_d3/600/400"]
+    },
+    "demo-4": {
+      "bannerURL":"https://picsum.photos/seed/banner_demo4/800/400",
+      "description":"Các đấu sĩ từ khắp vũ trụ tập hợp lại để tham gia giải đấu lớn nhất vũ trụ. Ai sẽ là người chiến thắng và giành được phần thưởng tối thượng?",
+      "episodes":[{"title":"Tập 1","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"},{"title":"Tập 2","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"},{"title":"Tập 3","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"},{"title":"Tập 4","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"},{"title":"Tập 5","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"},{"title":"Tập 6","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"},{"title":"Tập 7","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"},{"title":"Tập 8","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"}],
+      "seasons":[],"relatedAnime":[{"id":"demo-11","title":"Siêu Nhân Titan","posterURL":"https://picsum.photos/seed/anime11/300/450","detailURL":"demo-11","episodeText":"Tập 25","rating":"9.4"},{"id":"demo-2","title":"Kiếm Sĩ Huyền Thoại","posterURL":"https://picsum.photos/seed/anime2/300/450","detailURL":"demo-2","episodeText":"Tập 24","rating":"9.1"}],
+      "viewCount":"210,500","ratingScore":"9.3","ratingCount":"4100","year":"2026","status":"Đang chiếu","genres":"Hành Động, Viễn Tưởng, Đấu Võ","director":"AnyAni Studio","country":"Nhật Bản","followers":"8900","duration":"24 phút/tập","quality":"Full HD","ratingLimit":"PG-13","language":"Vietsub","studio":"AnyAni Studio",
+      "characters":[{"name":"Goku - Đấu Sĩ","imageURL":"https://picsum.photos/seed/char1_d4/200/200"},{"name":"Vegeta - Đối Thủ","imageURL":"https://picsum.photos/seed/char2_d4/200/200"},{"name":"Frieza - Phản Diện","imageURL":"https://picsum.photos/seed/char3_d4/200/200"}],
+      "photos":["https://picsum.photos/seed/p1_d4/600/400","https://picsum.photos/seed/p2_d4/600/400","https://picsum.photos/seed/p3_d4/600/400"]
+    },
+    "demo-5": {
+      "bannerURL":"https://picsum.photos/seed/banner_demo5/800/400",
+      "description":"Trái Tim Dũng Cảm kể về cuộc phiêu lưu của một nhóm bạn trẻ dũng cảm, cùng nhau vượt qua mọi khó khăn để cứu lấy thế giới.",
+      "episodes":[{"title":"Tập 1","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"},{"title":"Tập 2","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"},{"title":"Tập 3","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"},{"title":"Tập 4","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"},{"title":"Tập 5","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"}],
+      "seasons":[],"relatedAnime":[{"id":"demo-1","title":"Hành Trình Phiêu Lưu","posterURL":"https://picsum.photos/seed/anime1/300/450","detailURL":"demo-1","episodeText":"Tập 12","rating":"8.5"}],
+      "viewCount":"78,300","ratingScore":"8.7","ratingCount":"1560","year":"2026","status":"Hoàn thành","genres":"Hành Động, Phiêu Lưu, Tình Cảm","director":"AnyAni Studio","country":"Nhật Bản","followers":"3800","duration":"24 phút/tập","quality":"Full HD","ratingLimit":"PG","language":"Vietsub","studio":"AnyAni Studio",
+      "characters":[{"name":"Hiro - Anh Hùng","imageURL":"https://picsum.photos/seed/char1_d5/200/200"},{"name":"Mei - Bạn Đồng Hành","imageURL":"https://picsum.photos/seed/char2_d5/200/200"}],
+      "photos":["https://picsum.photos/seed/p1_d5/600/400","https://picsum.photos/seed/p2_d5/600/400"]
+    },
+    "demo-6": {
+      "bannerURL":"https://picsum.photos/seed/banner_demo6/800/400",
+      "description":"Tại Học Viện Siêu Năng, những học sinh có năng lực đặc biệt được đào tạo để trở thành anh hùng bảo vệ thế giới.",
+      "episodes":[{"title":"Tập 1","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"},{"title":"Tập 2","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"},{"title":"Tập 3","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"}],
+      "seasons":[],"relatedAnime":[{"id":"demo-3","title":"Thế Giới Ma Thuật","posterURL":"https://picsum.photos/seed/anime3/300/450","detailURL":"demo-3","episodeText":"Tập 8","rating":"7.9"}],
+      "viewCount":"56,100","ratingScore":"8.2","ratingCount":"980","year":"2026","status":"Đang chiếu","genres":"Học Đường, Siêu Năng Lực","director":"AnyAni Studio","country":"Nhật Bản","followers":"2900","duration":"24 phút/tập","quality":"Full HD","ratingLimit":"PG-13","language":"Vietsub","studio":"AnyAni Studio",
+      "characters":[{"name":"Deku - Học Sinh","imageURL":"https://picsum.photos/seed/char1_d6/200/200"}],
+      "photos":["https://picsum.photos/seed/p1_d6/600/400"]
+    },
+    "demo-7": {
+      "bannerURL":"https://picsum.photos/seed/banner_demo7/800/400",
+      "description":"Vương quốc Long Tộc đang bị đe dọa. Hoàng tử trẻ phải tìm lại sức mạnh cổ đại của tổ tiên dragons để bảo vệ vương quốc.",
+      "episodes":[{"title":"Tập 1","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"},{"title":"Tập 2","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"},{"title":"Tập 3","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"},{"title":"Tập 4","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"}],
+      "seasons":[],"relatedAnime":[{"id":"demo-4","title":"Đấu Sĩ Vũ Trụ","posterURL":"https://picsum.photos/seed/anime4/300/450","detailURL":"demo-4","episodeText":"Tập 36","rating":"9.3"}],
+      "viewCount":"34,500","ratingScore":"7.5","ratingCount":"670","year":"2026","status":"Đang chiếu","genres":"Viễn Tưởng, Phiêu Lưu","director":"AnyAni Studio","country":"Nhật Bản","followers":"1800","duration":"24 phút/tập","quality":"Full HD","ratingLimit":"PG-13","language":"Vietsub","studio":"AnyAni Studio",
+      "characters":[{"name":"Draco - Hoàng Tử","imageURL":"https://picsum.photos/seed/char1_d7/200/200"}],
+      "photos":["https://picsum.photos/seed/p1_d7/600/400"]
+    },
+    "demo-8": {
+      "bannerURL":"https://picsum.photos/seed/banner_demo8/800/400",
+      "description":"Thiên sứ bóng đêm là câu chuyện về một thiên thần sa ngã, phải đấu tranh giữa ánh sáng và bóng tối để tìm lại bản ngã của mình.",
+      "episodes":[{"title":"Tập 1","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"},{"title":"Tập 2","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"},{"title":"Tập 3","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"},{"title":"Tập 4","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"},{"title":"Tập 5","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"}],
+      "seasons":[],"relatedAnime":[{"id":"demo-14","title":"Chiến Binh Ánh Sáng","posterURL":"https://picsum.photos/seed/anime14/300/450","detailURL":"demo-14","episodeText":"Tập 22","rating":"8.6"}],
+      "viewCount":"92,100","ratingScore":"8.9","ratingCount":"2100","year":"2026","status":"Đang chiếu","genres":"Siêu Nhiên, Hành Động, Tâm Lý","director":"AnyAni Studio","country":"Nhật Bản","followers":"5600","duration":"24 phút/tập","quality":"Full HD","ratingLimit":"R-17","language":"Vietsub","studio":"AnyAni Studio",
+      "characters":[{"name":"Luciel - Thiên Sứ","imageURL":"https://picsum.photos/seed/char1_d8/200/200"},{"name":"Noir - Bóng Tối","imageURL":"https://picsum.photos/seed/char2_d8/200/200"}],
+      "photos":["https://picsum.photos/seed/p1_d8/600/400","https://picsum.photos/seed/p2_d8/600/400"]
+    },
+    "demo-9": {
+      "bannerURL":"https://picsum.photos/seed/banner_demo9/800/400",
+      "description":"Nhóm hải tặc dũng cảm vượt qua đại dương mênh mông, tìm kiếm kho báu huyền thoại và đối đầu với những thế lực hùng mạnh.",
+      "episodes":[{"title":"Tập 1","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"},{"title":"Tập 2","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"},{"title":"Tập 3","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"},{"title":"Tập 4","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"},{"title":"Tập 5","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"},{"title":"Tập 6","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"}],
+      "seasons":[],"relatedAnime":[{"id":"demo-15","title":"Lãng Khách Cô Đơn","posterURL":"https://picsum.photos/seed/anime15/300/450","detailURL":"demo-15","episodeText":"Tập 28","rating":"9.2"}],
+      "viewCount":"345,200","ratingScore":"9.5","ratingCount":"7800","year":"2026","status":"Đang chiếu","genres":"Hành Động, Phiêu Lưu, Hài Hước","director":"AnyAni Studio","country":"Nhật Bản","followers":"12000","duration":"24 phút/tập","quality":"Full HD","ratingLimit":"PG-13","language":"Vietsub","studio":"AnyAni Studio",
+      "characters":[{"name":"Luffy - Thuyền Trưởng","imageURL":"https://picsum.photos/seed/char1_d9/200/200"},{"name":"Zoro - Kiếm Sĩ","imageURL":"https://picsum.photos/seed/char2_d9/200/200"},{"name":"Nami - Hoa Tiêu","imageURL":"https://picsum.photos/seed/char3_d9/200/200"}],
+      "photos":["https://picsum.photos/seed/p1_d9/600/400","https://picsum.photos/seed/p2_d9/600/400","https://picsum.photos/seed/p3_d9/600/400"]
+    },
+    "demo-10": {
+      "bannerURL":"https://picsum.photos/seed/banner_demo10/800/400",
+      "description":"Ninja trẻ tuổi từ Làng Lá quyết tâm trở thành Hokage, lãnh đạo làng. Hành trình đầy gian khó nhưng không bao giờ từ bỏ.",
+      "episodes":[{"title":"Tập 1","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"},{"title":"Tập 2","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"},{"title":"Tập 3","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"},{"title":"Tập 4","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"},{"title":"Tập 5","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"}],
+      "seasons":[],"relatedAnime":[{"id":"demo-2","title":"Kiếm Sĩ Huyền Thoại","posterURL":"https://picsum.photos/seed/anime2/300/450","detailURL":"demo-2","episodeText":"Tập 24","rating":"9.1"}],
+      "viewCount":"267,800","ratingScore":"9.0","ratingCount":"5600","year":"2026","status":"Đang chiếu","genres":"Hành Động, Ninja, Phiêu Lưu","director":"AnyAni Studio","country":"Nhật Bản","followers":"9500","duration":"24 phút/tập","quality":"Full HD","ratingLimit":"PG-13","language":"Vietsub","studio":"AnyAni Studio",
+      "characters":[{"name":"Naruto - Ninja","imageURL":"https://picsum.photos/seed/char1_d10/200/200"},{"name":"Sasuke - Đối Thủ","imageURL":"https://picsum.photos/seed/char2_d10/200/200"}],
+      "photos":["https://picsum.photos/seed/p1_d10/600/400","https://picsum.photos/seed/p2_d10/600/400"]
+    },
+    "demo-11": {
+      "bannerURL":"https://picsum.photos/seed/banner_demo11/800/400",
+      "description":"Khi những Titan khổng lồ tấn công thành phố, nhóm chiến binh trẻ phải đứng lên chiến đấu để bảo vệ nhân loại.",
+      "episodes":[{"title":"Tập 1","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"},{"title":"Tập 2","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"},{"title":"Tập 3","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"},{"title":"Tập 4","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"},{"title":"Tập 5","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"},{"title":"Tập 6","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"}],
+      "seasons":[],"relatedAnime":[{"id":"demo-4","title":"Đấu Sĩ Vũ Trụ","posterURL":"https://picsum.photos/seed/anime4/300/450","detailURL":"demo-4","episodeText":"Tập 36","rating":"9.3"}],
+      "viewCount":"312,900","ratingScore":"9.4","ratingCount":"6900","year":"2026","status":"Hoàn thành","genres":"Hành Động, Kinh Dị, Drama","director":"AnyAni Studio","country":"Nhật Bản","followers":"11000","duration":"24 phút/tập","quality":"Full HD","ratingLimit":"R-17","language":"Vietsub","studio":"AnyAni Studio",
+      "characters":[{"name":"Eren - Chiến Binh","imageURL":"https://picsum.photos/seed/char1_d11/200/200"},{"name":"Mikasa - Đồng Đội","imageURL":"https://picsum.photos/seed/char2_d11/200/200"}],
+      "photos":["https://picsum.photos/seed/p1_d11/600/400","https://picsum.photos/seed/p2_d11/600/400"]
+    },
+    "demo-12": {
+      "bannerURL":"https://picsum.photos/seed/banner_demo12/800/400",
+      "description":"Pháp sư trẻ điều khiển lửa phải học cách kiểm soát sức mạnh phi thường và đối đầu với các thế lực tà ác.",
+      "episodes":[{"title":"Tập 1","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"},{"title":"Tập 2","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"},{"title":"Tập 3","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"}],
+      "seasons":[],"relatedAnime":[{"id":"demo-3","title":"Thế Giới Ma Thuật","posterURL":"https://picsum.photos/seed/anime3/300/450","detailURL":"demo-3","episodeText":"Tập 8","rating":"7.9"}],
+      "viewCount":"45,600","ratingScore":"8.1","ratingCount":"890","year":"2026","status":"Đang chiếu","genres":"Phép Thuật, Hành Động","director":"AnyAni Studio","country":"Nhật Bản","followers":"2200","duration":"24 phút/tập","quality":"Full HD","ratingLimit":"PG-13","language":"Vietsub","studio":"AnyAni Studio",
+      "characters":[{"name":"Blaze - Pháp Sư Lửa","imageURL":"https://picsum.photos/seed/char1_d12/200/200"}],
+      "photos":["https://picsum.photos/seed/p1_d12/600/400"]
+    },
+    "demo-13": {
+      "bannerURL":"https://picsum.photos/seed/banner_demo13/800/400",
+      "description":"Quái vật từ dòng thời gian khác xâm nhập thế giới. Nhóm nghiên cứu thời gian phải ngăn chặn thảm họa trước khi quá muộn.",
+      "episodes":[{"title":"Tập 1","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"},{"title":"Tập 2","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"},{"title":"Tập 3","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"}],
+      "seasons":[],"relatedAnime":[{"id":"demo-8","title":"Thiên Sứ Bóng Đêm","posterURL":"https://picsum.photos/seed/anime8/300/450","detailURL":"demo-8","episodeText":"Tập 14","rating":"8.9"}],
+      "viewCount":"28,900","ratingScore":"7.8","ratingCount":"560","year":"2026","status":"Đang chiếu","genres":"Sci-Fi, Kinh Dị, Tâm Lý","director":"AnyAni Studio","country":"Nhật Bản","followers":"1500","duration":"24 phút/tập","quality":"Full HD","ratingLimit":"R-17","language":"Vietsub","studio":"AnyAni Studio",
+      "characters":[{"name":"Dr. Time - Nhà Khoa Học","imageURL":"https://picsum.photos/seed/char1_d13/200/200"}],
+      "photos":["https://picsum.photos/seed/p1_d13/600/400"]
+    },
+    "demo-14": {
+      "bannerURL":"https://picsum.photos/seed/banner_demo14/800/400",
+      "description":"Chiến binh ánh sáng được chọn để chống lại bóng tối đang lan rộng khắp thế giới. Cuộc chiến giữa thiện và ác bắt đầu.",
+      "episodes":[{"title":"Tập 1","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"},{"title":"Tập 2","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"},{"title":"Tập 3","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"},{"title":"Tập 4","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"}],
+      "seasons":[],"relatedAnime":[{"id":"demo-8","title":"Thiên Sứ Bóng Đêm","posterURL":"https://picsum.photos/seed/anime8/300/450","detailURL":"demo-8","episodeText":"Tập 14","rating":"8.9"}],
+      "viewCount":"73,400","ratingScore":"8.6","ratingCount":"1400","year":"2026","status":"Đang chiếu","genres":"Hành Động, Siêu Nhiên, Viễn Tưởng","director":"AnyAni Studio","country":"Nhật Bản","followers":"3600","duration":"24 phút/tập","quality":"Full HD","ratingLimit":"PG-13","language":"Vietsub","studio":"AnyAni Studio",
+      "characters":[{"name":"Hikari - Chiến Binh","imageURL":"https://picsum.photos/seed/char1_d14/200/200"},{"name":"Shadow - Kẻ Thù","imageURL":"https://picsum.photos/seed/char2_d14/200/200"}],
+      "photos":["https://picsum.photos/seed/p1_d14/600/400","https://picsum.photos/seed/p2_d14/600/400"]
+    },
+    "demo-15": {
+      "bannerURL":"https://picsum.photos/seed/banner_demo15/800/400",
+      "description":"Lãng khách cô đơn lang thang khắp nơi, dùng thanh kiếm bảo vệ kẻ yếu và tìm kiếm ý nghĩa cuộc đời mình.",
+      "episodes":[{"title":"Tập 1","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"},{"title":"Tập 2","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"},{"title":"Tập 3","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"},{"title":"Tập 4","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"},{"title":"Tập 5","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"},{"title":"Tập 6","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"},{"title":"Tập 7","url":"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"}],
+      "seasons":[],"relatedAnime":[{"id":"demo-2","title":"Kiếm Sĩ Huyền Thoại","posterURL":"https://picsum.photos/seed/anime2/300/450","detailURL":"demo-2","episodeText":"Tập 24","rating":"9.1"},{"id":"demo-10","title":"Ninja Làng Lá","posterURL":"https://picsum.photos/seed/anime10/300/450","detailURL":"demo-10","episodeText":"Tập 30","rating":"9.0"}],
+      "viewCount":"198,700","ratingScore":"9.2","ratingCount":"4500","year":"2026","status":"Đang chiếu","genres":"Hành Động, Kiếm Hiệp, Lịch Sử","director":"AnyAni Studio","country":"Nhật Bản","followers":"7800","duration":"24 phút/tập","quality":"Full HD","ratingLimit":"R-17","language":"Vietsub","studio":"AnyAni Studio",
+      "characters":[{"name":"Kenshin - Lãng Khách","imageURL":"https://picsum.photos/seed/char1_d15/200/200"},{"name":"Kaoru - Bạn Đường","imageURL":"https://picsum.photos/seed/char2_d15/200/200"}],
+      "photos":["https://picsum.photos/seed/p1_d15/600/400","https://picsum.photos/seed/p2_d15/600/400","https://picsum.photos/seed/p3_d15/600/400"]
+    }
+  }
+}
+</script>
+
+    <script>
+        // Render sections from embedded data
+        document.addEventListener('DOMContentLoaded', function () {
+            var el = document.getElementById('api-data');
+            if (!el) return;
+            var data = JSON.parse(el.textContent);
+            var container = document.getElementById('app-sections');
+            data.sections.forEach(function (section) {
+                var html = '<div class="section" id="' + section.title.toLowerCase().replace(/\s/g, '-') + '">';
+                html += '<h2>' + section.title + ' <span class="badge">' + section.items.length + '</span></h2>';
+                html += '<div class="row">';
+                section.items.forEach(function (item) {
+                    html += '<div class="card">';
+                    html += '<div class="ep-badge">' + item.episodeText + '</div>';
+                    html += '<img src="' + item.posterURL + '" alt="' + item.title + '" loading="lazy">';
+                    html += '<div class="info"><h3>' + item.title + '</h3>';
+                    html += '<div class="meta"><span class="star">★</span> ' + item.rating + '</div></div></div>';
+                });
+                html += '</div></div>';
+                container.innerHTML += html;
+            });
+        });
+    </script>
+</body>
+
+</html>
