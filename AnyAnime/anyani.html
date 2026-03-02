@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,7 +28,6 @@
             line-height: 1.6;
         }
 
-        /* HEADER */
         header {
             display: flex;
             align-items: center;
@@ -59,7 +57,6 @@
             color: var(--primary);
         }
 
-        /* HERO SECTION / MOVIE LIST TOP */
         .MovieListTop {
             position: relative;
             width: 100%;
@@ -67,6 +64,7 @@
             min-height: 500px;
             display: flex;
             overflow: hidden;
+            margin-top: 80px;
         }
 
         .TPost.B {
@@ -74,6 +72,7 @@
             height: 100%;
             position: relative;
             background: #000;
+            cursor: pointer;
         }
 
         .TPost.B img {
@@ -88,12 +87,22 @@
             opacity: 0.8;
         }
 
-        .TPost.B .hero-content {
+        .hero-content {
             position: absolute;
             bottom: 10%;
             left: 5%;
             max-width: 600px;
             z-index: 10;
+        }
+
+        .Title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .TPost.B .Title {
@@ -104,7 +113,7 @@
             line-height: 1.2;
         }
 
-        .TPost.B .meta {
+        .meta {
             display: flex;
             gap: 15px;
             align-items: center;
@@ -114,13 +123,13 @@
             text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
         }
 
-        .TPost.B .mli-eps {
+        .mli-eps {
             background: var(--primary);
             padding: 4px 12px;
             border-radius: 6px;
         }
 
-        .TPost.B .fa-star {
+        .fa-star {
             color: #ffd700;
             margin-right: 5px;
         }
@@ -136,13 +145,6 @@
             transition: transform 0.3s, background 0.3s;
         }
 
-        .btn-play-hero:hover {
-            transform: scale(1.05);
-            background: var(--primary);
-            color: var(--text-main);
-        }
-
-        /* GRID SECTION */
         section {
             padding: 50px 5%;
         }
@@ -167,9 +169,6 @@
             overflow: hidden;
             position: relative;
             transition: transform 0.3s, box-shadow 0.3s;
-            text-decoration: none;
-            display: block;
-            cursor: pointer;
         }
 
         .TPost.C:hover {
@@ -177,14 +176,19 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
         }
 
-        .TPost.C .image-wrap {
+        .TPost.C > a {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .image-wrap {
             position: relative;
             padding-top: 150%;
-            /* 2:3 aspect ratio */
             overflow: hidden;
         }
 
-        .TPost.C img {
+        .image-wrap img {
             position: absolute;
             top: 0;
             left: 0;
@@ -198,7 +202,7 @@
             transform: scale(1.1);
         }
 
-        .TPost.C .overlay {
+        .overlay {
             position: absolute;
             top: 0;
             left: 0;
@@ -207,7 +211,7 @@
             background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 50%);
         }
 
-        .TPost.C .info-wrap {
+        .info-wrap {
             position: absolute;
             bottom: 0;
             left: 0;
@@ -216,24 +220,14 @@
             z-index: 2;
         }
 
-        .TPost.C .Title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-main);
-            margin-bottom: 5px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .TPost.C .meta-grid {
+        .meta-grid {
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-size: 0.85rem;
             color: var(--text-muted);
         }
-
+        
         .TPost.C .mli-eps {
             background: rgba(248, 54, 0, 0.2);
             color: var(--primary);
@@ -242,17 +236,8 @@
             font-weight: 800;
         }
 
-        .TPost.C .fa-star {
-            color: #ffd700;
-            margin-right: 3px;
-        }
+        .scraper-data { display: none; }
 
-        /* HIDDEN ELEMENTS FOR SCRAPER */
-        .scraper-data {
-            display: none;
-        }
-
-        /* FOOTER */
         footer {
             text-align: center;
             padding: 40px;
@@ -261,7 +246,6 @@
             margin-top: 50px;
         }
 
-        /* PLAY VIDEO OVERLAY (For direct web view) */
         #video-container {
             display: none;
             position: fixed;
@@ -273,10 +257,7 @@
             z-index: 9999;
         }
 
-        #mock_video {
-            width: 100%;
-            height: 100%;
-        }
+        #mock_video { width: 100%; height: 100%; }
 
         .close-video {
             position: absolute;
@@ -297,31 +278,24 @@
         }
     </style>
 </head>
-
 <body>
-
     <header>
         <a href="#" class="logo">Ostrich<span>VOD</span></a>
         <div>
-            <!-- A nice fake nav -->
-            <span style="margin-right:20px; font-weight:600; cursor:pointer;"
-                onclick="alert('Đã sẵn sàng review!')">Khám Phá</span>
-            <span style="font-weight:600; cursor:pointer; color:var(--primary);"
-                onclick="alert('Nội dung hợp pháp 100%')">Legal Content</span>
+            <span style="margin-right:20px; font-weight:600; cursor:pointer;" onclick="alert('Đã sẵn sàng review!')">Khám Phá</span>
+            <span style="font-weight:600; cursor:pointer; color:var(--primary);" onclick="alert('Nội dung hợp pháp 100%')">Legal Content</span>
         </div>
     </header>
 
-    <!-- 1. HOME SCREEN MOCK (AnimeService fetches HomePage from here) -->
     <div class="MovieListTop">
         <div class="TPost B" onclick="playMockVideo()">
-            <a href="?detail=1" style="display:none;"></a> <!-- For Scraper -->
-            <img src="https://images.unsplash.com/photo-1534081333815-ae5019106622?q=80&w=1600&auto=format&fit=crop"
-                alt="Hero Image">
+            <a href="?movie=1" style="display:none;"></a>
+            <img src="https://images.unsplash.com/photo-1534081333815-ae5019106622?q=80&w=1600&auto=format&fit=crop" alt="Hero Image">
             <div class="hero-content">
                 <h2 class="Title">Big Buck Bunny (Bản Phục Chế)</h2>
                 <div class="meta">
                     <span class="mli-eps">Tập<i> 1</i></span>
-                    <span><i class="fa-star">★</i> 9.9</span>
+                    <span><i class="fa-star"></i>9.9</span>
                     <span>2008</span>
                 </div>
                 <p style="margin-bottom:20px; font-size:1.1rem; color: #ddd; text-shadow: 1px 1px 3px #000;">
@@ -336,378 +310,313 @@
     <section id="section-new">
         <h1>Nội Dung Đề Xuất (Public Domain)</h1>
         <div class="grid">
-
-            <!-- Item 1 -->
             <article class="TPost C">
-                <a href="?detail=2" style="display:block; text-decoration:none; color:inherit;">
-                <div class="image-wrap">
-                    <img src="https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=80&w=600&auto=format&fit=crop"
-                        alt="Image">
-                    <div class="overlay"></div>
-                </div>
-                <div class="info-wrap">
-                    <h2 class="Title">Sintel (Fantasy Epic)</h2>
-                    <div class="meta-grid">
-                        <span class="mli-eps">Tập<i> 1</i></span>
-                        <span><i class="fa-star">★</i> 9.5</span>
+                <a href="?movie=2">
+                    <div class="image-wrap">
+                        <img src="https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=80&w=600&auto=format&fit=crop" alt="Image">
+                        <div class="overlay"></div>
                     </div>
-                </div>
-            </a>
+                    <div class="info-wrap">
+                        <h2 class="Title">Sintel (Fantasy Epic)</h2>
+                        <div class="meta-grid">
+                            <span class="mli-eps">Tập<i> 1</i></span>
+                            <span><i class="fa-star"></i>9.5</span>
+                        </div>
+                    </div>
+                </a>
             </article>
-
-            <!-- Item 2 -->
             <article class="TPost C">
-                <a href="?detail=3" style="display:block; text-decoration:none; color:inherit;">
-                <div class="image-wrap">
-                    <img src="https://images.unsplash.com/photo-1614729939124-032f0b5609ce?q=80&w=600&auto=format&fit=crop"
-                        alt="Image">
-                    <div class="overlay"></div>
-                </div>
-                <div class="info-wrap">
-                    <h2 class="Title">Tears of Steel</h2>
-                    <div class="meta-grid">
-                        <span class="mli-eps">Tập<i> 1</i></span>
-                        <span><i class="fa-star">★</i> 8.8</span>
+                <a href="?movie=3">
+                    <div class="image-wrap">
+                        <img src="https://images.unsplash.com/photo-1614729939124-032f0b5609ce?q=80&w=600&auto=format&fit=crop" alt="Image">
+                        <div class="overlay"></div>
                     </div>
-                </div>
-            </a>
+                    <div class="info-wrap">
+                        <h2 class="Title">Tears of Steel</h2>
+                        <div class="meta-grid">
+                            <span class="mli-eps">Tập<i> 1</i></span>
+                            <span><i class="fa-star"></i>8.8</span>
+                        </div>
+                    </div>
+                </a>
             </article>
-
-            <!-- Item 3 -->
             <article class="TPost C">
-                <a href="?detail=4" style="display:block; text-decoration:none; color:inherit;">
-                <div class="image-wrap">
-                    <img src="https://images.unsplash.com/photo-1538370965046-79c0d6907d47?q=80&w=600&auto=format&fit=crop"
-                        alt="Image">
-                    <div class="overlay"></div>
-                </div>
-                <div class="info-wrap">
-                    <h2 class="Title">Cosmos Laundromat</h2>
-                    <div class="meta-grid">
-                        <span class="mli-eps">Tập<i> 1</i></span>
-                        <span><i class="fa-star">★</i> 9.2</span>
+                <a href="?movie=4">
+                    <div class="image-wrap">
+                        <img src="https://images.unsplash.com/photo-1538370965046-79c0d6907d47?q=80&w=600&auto=format&fit=crop" alt="Image">
+                        <div class="overlay"></div>
                     </div>
-                </div>
-            </a>
+                    <div class="info-wrap">
+                        <h2 class="Title">Cosmos Laundromat</h2>
+                        <div class="meta-grid">
+                            <span class="mli-eps">Tập<i> 1</i></span>
+                            <span><i class="fa-star"></i>9.2</span>
+                        </div>
+                    </div>
+                </a>
             </article>
-
-            <!-- Item 4 -->
             <article class="TPost C">
-                <a href="?detail=5" style="display:block; text-decoration:none; color:inherit;">
-                <div class="image-wrap">
-                    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=600&auto=format&fit=crop"
-                        alt="Image">
-                    <div class="overlay"></div>
-                </div>
-                <div class="info-wrap">
-                    <h2 class="Title">Symphony of Mountains</h2>
-                    <div class="meta-grid">
-                        <span class="mli-eps">Tập<i> 1</i></span>
-                        <span><i class="fa-star">★</i> 10.0</span>
+                <a href="?movie=5">
+                    <div class="image-wrap">
+                        <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=600&auto=format&fit=crop" alt="Image">
+                        <div class="overlay"></div>
                     </div>
-                </div>
-            </a>
+                    <div class="info-wrap">
+                        <h2 class="Title">Symphony of Mountains</h2>
+                        <div class="meta-grid">
+                            <span class="mli-eps">Tập<i> 1</i></span>
+                            <span><i class="fa-star"></i>10.0</span>
+                        </div>
+                    </div>
+                </a>
             </article>
-
-            <!-- Item 5 -->
             <article class="TPost C">
-                <a href="?detail=6" style="display:block; text-decoration:none; color:inherit;">
-                <div class="image-wrap">
-                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop"
-                        alt="Image">
-                    <div class="overlay"></div>
-                </div>
-                <div class="info-wrap">
-                    <h2 class="Title">Ocean's Whisper</h2>
-                    <div class="meta-grid">
-                        <span class="mli-eps">Tập<i> 1</i></span>
-                        <span><i class="fa-star">★</i> 8.7</span>
+                <a href="?movie=6">
+                    <div class="image-wrap">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop" alt="Image">
+                        <div class="overlay"></div>
                     </div>
-                </div>
-            </a>
+                    <div class="info-wrap">
+                        <h2 class="Title">Ocean's Whisper</h2>
+                        <div class="meta-grid">
+                            <span class="mli-eps">Tập<i> 1</i></span>
+                            <span><i class="fa-star"></i>8.7</span>
+                        </div>
+                    </div>
+                </a>
             </article>
-
-            <!-- Item 6 -->
             <article class="TPost C">
-                <a href="?detail=7" style="display:block; text-decoration:none; color:inherit;">
-                <div class="image-wrap">
-                    <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=600&auto=format&fit=crop"
-                        alt="Image">
-                    <div class="overlay"></div>
-                </div>
-                <div class="info-wrap">
-                    <h2 class="Title">The Silent Forest</h2>
-                    <div class="meta-grid">
-                        <span class="mli-eps">Tập<i> 1</i></span>
-                        <span><i class="fa-star">★</i> 9.1</span>
+                <a href="?movie=7">
+                    <div class="image-wrap">
+                        <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=600&auto=format&fit=crop" alt="Image">
+                        <div class="overlay"></div>
                     </div>
-                </div>
-            </a>
+                    <div class="info-wrap">
+                        <h2 class="Title">The Silent Forest</h2>
+                        <div class="meta-grid">
+                            <span class="mli-eps">Tập<i> 1</i></span>
+                            <span><i class="fa-star"></i>9.1</span>
+                        </div>
+                    </div>
+                </a>
             </article>
-
-            <!-- Item 7 -->
             <article class="TPost C">
-                <a href="?detail=8" style="display:block; text-decoration:none; color:inherit;">
-                <div class="image-wrap">
-                    <img src="https://images.unsplash.com/photo-1473580044384-7ba9967e16a0?q=80&w=600&auto=format&fit=crop"
-                        alt="Image">
-                    <div class="overlay"></div>
-                </div>
-                <div class="info-wrap">
-                    <h2 class="Title">Desert Mirage</h2>
-                    <div class="meta-grid">
-                        <span class="mli-eps">Tập<i> 1</i></span>
-                        <span><i class="fa-star">★</i> 8.4</span>
+                <a href="?movie=8">
+                    <div class="image-wrap">
+                        <img src="https://images.unsplash.com/photo-1473580044384-7ba9967e16a0?q=80&w=600&auto=format&fit=crop" alt="Image">
+                        <div class="overlay"></div>
                     </div>
-                </div>
-            </a>
+                    <div class="info-wrap">
+                        <h2 class="Title">Desert Mirage</h2>
+                        <div class="meta-grid">
+                            <span class="mli-eps">Tập<i> 1</i></span>
+                            <span><i class="fa-star"></i>8.4</span>
+                        </div>
+                    </div>
+                </a>
             </article>
-
-            <!-- Item 8 -->
             <article class="TPost C">
-                <a href="?detail=9" style="display:block; text-decoration:none; color:inherit;">
-                <div class="image-wrap">
-                    <img src="https://images.unsplash.com/photo-1477959858617-67f851159b22?q=80&w=600&auto=format&fit=crop"
-                        alt="Image">
-                    <div class="overlay"></div>
-                </div>
-                <div class="info-wrap">
-                    <h2 class="Title">Urban Echoes</h2>
-                    <div class="meta-grid">
-                        <span class="mli-eps">Tập<i> 1</i></span>
-                        <span><i class="fa-star">★</i> 8.9</span>
+                <a href="?movie=9">
+                    <div class="image-wrap">
+                        <img src="https://images.unsplash.com/photo-1477959858617-67f851159b22?q=80&w=600&auto=format&fit=crop" alt="Image">
+                        <div class="overlay"></div>
                     </div>
-                </div>
-            </a>
+                    <div class="info-wrap">
+                        <h2 class="Title">Urban Echoes</h2>
+                        <div class="meta-grid">
+                            <span class="mli-eps">Tập<i> 1</i></span>
+                            <span><i class="fa-star"></i>8.9</span>
+                        </div>
+                    </div>
+                </a>
             </article>
-
-            <!-- Item 9 -->
             <article class="TPost C">
-                <a href="?detail=10" style="display:block; text-decoration:none; color:inherit;">
-                <div class="image-wrap">
-                    <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=600&auto=format&fit=crop"
-                        alt="Image">
-                    <div class="overlay"></div>
-                </div>
-                <div class="info-wrap">
-                    <h2 class="Title">Stellar Journey</h2>
-                    <div class="meta-grid">
-                        <span class="mli-eps">Tập<i> 1</i></span>
-                        <span><i class="fa-star">★</i> 9.7</span>
+                <a href="?movie=10">
+                    <div class="image-wrap">
+                        <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=600&auto=format&fit=crop" alt="Image">
+                        <div class="overlay"></div>
                     </div>
-                </div>
-            </a>
+                    <div class="info-wrap">
+                        <h2 class="Title">Stellar Journey</h2>
+                        <div class="meta-grid">
+                            <span class="mli-eps">Tập<i> 1</i></span>
+                            <span><i class="fa-star"></i>9.7</span>
+                        </div>
+                    </div>
+                </a>
             </article>
-
-            <!-- Item 10 -->
             <article class="TPost C">
-                <a href="?detail=11" style="display:block; text-decoration:none; color:inherit;">
-                <div class="image-wrap">
-                    <img src="https://images.unsplash.com/photo-1433086966358-54859d0ed716?q=80&w=600&auto=format&fit=crop"
-                        alt="Image">
-                    <div class="overlay"></div>
-                </div>
-                <div class="info-wrap">
-                    <h2 class="Title">River of Time</h2>
-                    <div class="meta-grid">
-                        <span class="mli-eps">Tập<i> 1</i></span>
-                        <span><i class="fa-star">★</i> 9.0</span>
+                <a href="?movie=11">
+                    <div class="image-wrap">
+                        <img src="https://images.unsplash.com/photo-1433086966358-54859d0ed716?q=80&w=600&auto=format&fit=crop" alt="Image">
+                        <div class="overlay"></div>
                     </div>
-                </div>
-            </a>
+                    <div class="info-wrap">
+                        <h2 class="Title">River of Time</h2>
+                        <div class="meta-grid">
+                            <span class="mli-eps">Tập<i> 1</i></span>
+                            <span><i class="fa-star"></i>9.0</span>
+                        </div>
+                    </div>
+                </a>
             </article>
-
-            <!-- Item 11 -->
             <article class="TPost C">
-                <a href="?detail=12" style="display:block; text-decoration:none; color:inherit;">
-                <div class="image-wrap">
-                    <img src="https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?q=80&w=600&auto=format&fit=crop"
-                        alt="Image">
-                    <div class="overlay"></div>
-                </div>
-                <div class="info-wrap">
-                    <h2 class="Title">Sunset Dreams</h2>
-                    <div class="meta-grid">
-                        <span class="mli-eps">Tập<i> 1</i></span>
-                        <span><i class="fa-star">★</i> 9.3</span>
+                <a href="?movie=12">
+                    <div class="image-wrap">
+                        <img src="https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?q=80&w=600&auto=format&fit=crop" alt="Image">
+                        <div class="overlay"></div>
                     </div>
-                </div>
-            </a>
+                    <div class="info-wrap">
+                        <h2 class="Title">Sunset Dreams</h2>
+                        <div class="meta-grid">
+                            <span class="mli-eps">Tập<i> 1</i></span>
+                            <span><i class="fa-star"></i>9.3</span>
+                        </div>
+                    </div>
+                </a>
             </article>
-
-            <!-- Item 12 -->
             <article class="TPost C">
-                <a href="?detail=13" style="display:block; text-decoration:none; color:inherit;">
-                <div class="image-wrap">
-                    <img src="https://images.unsplash.com/photo-1518182170546-076616fd4cb8?q=80&w=600&auto=format&fit=crop"
-                        alt="Image">
-                    <div class="overlay"></div>
-                </div>
-                <div class="info-wrap">
-                    <h2 class="Title">Polar Expedition</h2>
-                    <div class="meta-grid">
-                        <span class="mli-eps">Tập<i> 1</i></span>
-                        <span><i class="fa-star">★</i> 8.6</span>
+                <a href="?movie=13">
+                    <div class="image-wrap">
+                        <img src="https://images.unsplash.com/photo-1518182170546-076616fd4cb8?q=80&w=600&auto=format&fit=crop" alt="Image">
+                        <div class="overlay"></div>
                     </div>
-                </div>
-            </a>
+                    <div class="info-wrap">
+                        <h2 class="Title">Polar Expedition</h2>
+                        <div class="meta-grid">
+                            <span class="mli-eps">Tập<i> 1</i></span>
+                            <span><i class="fa-star"></i>8.6</span>
+                        </div>
+                    </div>
+                </a>
             </article>
-
-            <!-- Item 13 -->
             <article class="TPost C">
-                <a href="?detail=14" style="display:block; text-decoration:none; color:inherit;">
-                <div class="image-wrap">
-                    <img src="https://images.unsplash.com/photo-1546182990-dffeafbe841d?q=80&w=600&auto=format&fit=crop"
-                        alt="Image">
-                    <div class="overlay"></div>
-                </div>
-                <div class="info-wrap">
-                    <h2 class="Title">Jungle Safari</h2>
-                    <div class="meta-grid">
-                        <span class="mli-eps">Tập<i> 1</i></span>
-                        <span><i class="fa-star">★</i> 9.4</span>
+                <a href="?movie=14">
+                    <div class="image-wrap">
+                        <img src="https://images.unsplash.com/photo-1546182990-dffeafbe841d?q=80&w=600&auto=format&fit=crop" alt="Image">
+                        <div class="overlay"></div>
                     </div>
-                </div>
-            </a>
+                    <div class="info-wrap">
+                        <h2 class="Title">Jungle Safari</h2>
+                        <div class="meta-grid">
+                            <span class="mli-eps">Tập<i> 1</i></span>
+                            <span><i class="fa-star"></i>9.4</span>
+                        </div>
+                    </div>
+                </a>
             </article>
-
-            <!-- Item 14 -->
             <article class="TPost C">
-                <a href="?detail=15" style="display:block; text-decoration:none; color:inherit;">
-                <div class="image-wrap">
-                    <img src="https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=600&auto=format&fit=crop"
-                        alt="Image">
-                    <div class="overlay"></div>
-                </div>
-                <div class="info-wrap">
-                    <h2 class="Title">Autumn Leaves</h2>
-                    <div class="meta-grid">
-                        <span class="mli-eps">Tập<i> 1</i></span>
-                        <span><i class="fa-star">★</i> 9.1</span>
+                <a href="?movie=15">
+                    <div class="image-wrap">
+                        <img src="https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=600&auto=format&fit=crop" alt="Image">
+                        <div class="overlay"></div>
                     </div>
-                </div>
-            </a>
+                    <div class="info-wrap">
+                        <h2 class="Title">Autumn Leaves</h2>
+                        <div class="meta-grid">
+                            <span class="mli-eps">Tập<i> 1</i></span>
+                            <span><i class="fa-star"></i>9.1</span>
+                        </div>
+                    </div>
+                </a>
             </article>
-
-            <!-- Item 15 -->
             <article class="TPost C">
-                <a href="?detail=16" style="display:block; text-decoration:none; color:inherit;">
-                <div class="image-wrap">
-                    <img src="https://images.unsplash.com/photo-1454372182658-c712e4c5a1db?q=80&w=600&auto=format&fit=crop"
-                        alt="Image">
-                    <div class="overlay"></div>
-                </div>
-                <div class="info-wrap">
-                    <h2 class="Title">Spring Awakening</h2>
-                    <div class="meta-grid">
-                        <span class="mli-eps">Tập<i> 1</i></span>
-                        <span><i class="fa-star">★</i> 8.8</span>
+                <a href="?movie=16">
+                    <div class="image-wrap">
+                        <img src="https://images.unsplash.com/photo-1454372182658-c712e4c5a1db?q=80&w=600&auto=format&fit=crop" alt="Image">
+                        <div class="overlay"></div>
                     </div>
-                </div>
-            </a>
+                    <div class="info-wrap">
+                        <h2 class="Title">Spring Awakening</h2>
+                        <div class="meta-grid">
+                            <span class="mli-eps">Tập<i> 1</i></span>
+                            <span><i class="fa-star"></i>8.8</span>
+                        </div>
+                    </div>
+                </a>
             </article>
-
-            <!-- Item 16 -->
             <article class="TPost C">
-                <a href="?detail=17" style="display:block; text-decoration:none; color:inherit;">
-                <div class="image-wrap">
-                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=600&auto=format&fit=crop"
-                        alt="Image">
-                    <div class="overlay"></div>
-                </div>
-                <div class="info-wrap">
-                    <h2 class="Title">Code: Revolution</h2>
-                    <div class="meta-grid">
-                        <span class="mli-eps">Tập<i> 1</i></span>
-                        <span><i class="fa-star">★</i> 9.6</span>
+                <a href="?movie=17">
+                    <div class="image-wrap">
+                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=600&auto=format&fit=crop" alt="Image">
+                        <div class="overlay"></div>
                     </div>
-                </div>
-            </a>
+                    <div class="info-wrap">
+                        <h2 class="Title">Code: Revolution</h2>
+                        <div class="meta-grid">
+                            <span class="mli-eps">Tập<i> 1</i></span>
+                            <span><i class="fa-star"></i>9.6</span>
+                        </div>
+                    </div>
+                </a>
             </article>
-
-            <!-- Item 17 -->
             <article class="TPost C">
-                <a href="?detail=18" style="display:block; text-decoration:none; color:inherit;">
-                <div class="image-wrap">
-                    <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?q=80&w=600&auto=format&fit=crop"
-                        alt="Image">
-                    <div class="overlay"></div>
-                </div>
-                <div class="info-wrap">
-                    <h2 class="Title">Mountain Echoes</h2>
-                    <div class="meta-grid">
-                        <span class="mli-eps">Tập<i> 1</i></span>
-                        <span><i class="fa-star">★</i> 8.5</span>
+                <a href="?movie=18">
+                    <div class="image-wrap">
+                        <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?q=80&w=600&auto=format&fit=crop" alt="Image">
+                        <div class="overlay"></div>
                     </div>
-                </div>
-            </a>
+                    <div class="info-wrap">
+                        <h2 class="Title">Mountain Echoes</h2>
+                        <div class="meta-grid">
+                            <span class="mli-eps">Tập<i> 1</i></span>
+                            <span><i class="fa-star"></i>8.5</span>
+                        </div>
+                    </div>
+                </a>
             </article>
-
-            <!-- Item 18 -->
             <article class="TPost C">
-                <a href="?detail=19" style="display:block; text-decoration:none; color:inherit;">
-                <div class="image-wrap">
-                    <img src="https://images.unsplash.com/photo-1470071131384-001b85755b36?q=80&w=600&auto=format&fit=crop"
-                        alt="Image">
-                    <div class="overlay"></div>
-                </div>
-                <div class="info-wrap">
-                    <h2 class="Title">Morning Dew</h2>
-                    <div class="meta-grid">
-                        <span class="mli-eps">Tập<i> 1</i></span>
-                        <span><i class="fa-star">★</i> 9.0</span>
+                <a href="?movie=19">
+                    <div class="image-wrap">
+                        <img src="https://images.unsplash.com/photo-1470071131384-001b85755b36?q=80&w=600&auto=format&fit=crop" alt="Image">
+                        <div class="overlay"></div>
                     </div>
-                </div>
-            </a>
+                    <div class="info-wrap">
+                        <h2 class="Title">Morning Dew</h2>
+                        <div class="meta-grid">
+                            <span class="mli-eps">Tập<i> 1</i></span>
+                            <span><i class="fa-star"></i>9.0</span>
+                        </div>
+                    </div>
+                </a>
             </article>
-
-            <!-- Item 19 -->
             <article class="TPost C">
-                <a href="?detail=20" style="display:block; text-decoration:none; color:inherit;">
-                <div class="image-wrap">
-                    <img src="https://images.unsplash.com/photo-1506744012022-ed24cc26bb26?q=80&w=600&auto=format&fit=crop"
-                        alt="Image">
-                    <div class="overlay"></div>
-                </div>
-                <div class="info-wrap">
-                    <h2 class="Title">Valley of Peace</h2>
-                    <div class="meta-grid">
-                        <span class="mli-eps">Tập<i> 1</i></span>
-                        <span><i class="fa-star">★</i> 9.8</span>
+                <a href="?movie=20">
+                    <div class="image-wrap">
+                        <img src="https://images.unsplash.com/photo-1506744012022-ed24cc26bb26?q=80&w=600&auto=format&fit=crop" alt="Image">
+                        <div class="overlay"></div>
                     </div>
-                </div>
-            </a>
+                    <div class="info-wrap">
+                        <h2 class="Title">Valley of Peace</h2>
+                        <div class="meta-grid">
+                            <span class="mli-eps">Tập<i> 1</i></span>
+                            <span><i class="fa-star"></i>9.8</span>
+                        </div>
+                    </div>
+                </a>
             </article>
-
-            <!-- Item 20 -->
             <article class="TPost C">
-                <a href="?detail=21" style="display:block; text-decoration:none; color:inherit;">
-                <div class="image-wrap">
-                    <img src="https://images.unsplash.com/photo-1490682143684-1436cedb6990?q=80&w=600&auto=format&fit=crop"
-                        alt="Image">
-                    <div class="overlay"></div>
-                </div>
-                <div class="info-wrap">
-                    <h2 class="Title">Hidden Paradises</h2>
-                    <div class="meta-grid">
-                        <span class="mli-eps">Tập<i> 1</i></span>
-                        <span><i class="fa-star">★</i> 9.2</span>
+                <a href="?movie=21">
+                    <div class="image-wrap">
+                        <img src="https://images.unsplash.com/photo-1490682143684-1436cedb6990?q=80&w=600&auto=format&fit=crop" alt="Image">
+                        <div class="overlay"></div>
                     </div>
-                </div>
-            </a>
+                    <div class="info-wrap">
+                        <h2 class="Title">Hidden Paradises</h2>
+                        <div class="meta-grid">
+                            <span class="mli-eps">Tập<i> 1</i></span>
+                            <span><i class="fa-star"></i>9.2</span>
+                        </div>
+                    </div>
+                </a>
             </article>
-
         </div>
     </section>
 
-    <!-- 2. DETAIL SCREEN MOCK (AnimeService fetches Detail from here) -->
     <div class="scraper-data">
         <div class="Description">
-            Đây là video giải trí công khai (Public Domain) dùng để giới thiệu ứng dụng. Mọi nội dung ảnh và video (như
-            phim ngắn Big Buck Bunny) đều miễn phí bản quyền hoặc được cấp phép chia sẻ rộng rãi, cam kết tuân thủ 100%
-            chính sách nội dung sở hữu trí tuệ của Apple App Store Guidelines.
+            Đây là video giải trí công khai (Public Domain) dùng để giới thiệu ứng dụng. Mọi nội dung ảnh và video (như phim ngắn Big Buck Bunny) đều miễn phí bản quyền hoặc được cấp phép chia sẻ rộng rãi, cam kết tuân thủ 100% chính sách nội dung sở hữu trí tuệ của Apple App Store Guidelines.
         </div>
-
         <div class="Info">
             <ul>
                 <li><strong> Đánh giá : </strong>10.0</li>
@@ -716,58 +625,36 @@
                 <li><strong> Thời lượng : </strong>10 Phút</li>
             </ul>
         </div>
-
-        <div class="ListCast">
-            <ul></ul> <!-- Empty so it parses but doesn't crash -->
-        </div>
-
+        <div class="ListCast"><ul></ul></div>
         <div class="Episodes">
-            <a class="btn-episode" href="?detail=22">Tập 1</a>
+            <a class="btn-episode" href="?movie=play">Tập 1</a>
         </div>
     </div>
 
-    <!-- 3. PLAY/WATCH SCREEN MOCK (PlayerViewController Video Sniffing) -->
     <script>
-        // Provide the dummy JS object the AnyAni Player looks for
-        var filmInfo = {};
-        filmInfo.filmID = parseInt('99999');
+        var filmInfo = {}; filmInfo.filmID = parseInt('99999');
         function AnimeVsub(hash, ignored) { }
         AnimeVsub('hash_review_apple_legal_safe_public_domain', 0);
     </script>
-
     <div id="video-container">
         <div class="close-video" onclick="closeMockVideo()">×</div>
-        <video id="mock_video" src="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8" controls crossorigin="anonymous"
-            playsinline></video>
+        <video id="mock_video" src="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8" controls crossorigin="anonymous" playsinline></video>
     </div>
-
-    <!-- UI Interactions -->
     <script>
         function playMockVideo() {
             var vc = document.getElementById('video-container');
             var vid = document.getElementById('mock_video');
-            vc.style.display = 'block';
-            vid.play().catch(e => console.log(e));
+            vc.style.display = 'block'; vid.play().catch(e => console.log(e));
         }
-
         function closeMockVideo() {
             var vc = document.getElementById('video-container');
             var vid = document.getElementById('mock_video');
-            vc.style.display = 'none';
-            vid.pause();
+            vc.style.display = 'none'; vid.pause();
         }
-
-        // Auto showing video if loading directly as play page in app iframe sniffer
         if (window.top !== window.self || window.location.search.includes("play")) {
-            playMockVideo();
-            document.querySelector('.close-video').style.display = 'none'; // Hide close button in app player
+            playMockVideo(); document.querySelector('.close-video').style.display = 'none';
         }
     </script>
-
-    <footer>
-        <p>© 2026 AnyAni Demo Player. Content featured is open source / public domain (Creative Commons).</p>
-    </footer>
-
+    <footer><p>© 2026 AnyAni Demo Player. Content featured is open source / public domain (Creative Commons).</p></footer>
 </body>
-
 </html>
