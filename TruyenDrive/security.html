@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bảo mật — TruyenDrive</title>
+<meta name="description" content="Mô hình bảo mật end-to-end của TruyenDrive: XOR + mulberry32 PRNG, mã hoá trên thiết bị, không server trung gian."/>
+<link rel="icon" href="assets/logo.png"/>
+<link rel="stylesheet" href="assets/styles.css"/>
+<style>
+  .sec-hero{padding:100px 28px 60px;text-align:center;
+    background:var(--navy);color:#fff;position:relative;overflow:hidden}
+  .sec-hero::before{content:"";position:absolute;top:-200px;left:50%;transform:translateX(-50%);
+    width:1200px;height:1200px;border-radius:50%;
+    background:radial-gradient(closest-side,rgba(26,115,232,.3),transparent 70%);
+    filter:blur(40px);pointer-events:none}
+  .sec-hero-in{max-width:760px;margin:0 auto;position:relative}
+  .sec-hero h1{margin:18px 0 16px;font-size:clamp(40px,5.4vw,72px);font-weight:800;
+    letter-spacing:-.04em;line-height:1.02;text-wrap:balance}
+  .sec-hero h1 em{font-style:normal;background:linear-gradient(120deg,#9ccaff,#fff);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .sec-hero p{font-size:clamp(15px,1.4vw,19px);color:rgba(255,255,255,.7);
+    max-width:600px;margin:0 auto;line-height:1.55}
+  .sec-hero .eyebrow{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);color:#fff}
+
+  /* principles */
+  .principles{padding:120px 28px;background:#fff}
+  .princ-head{max-width:760px;margin:0 auto 60px;text-align:center}
+  .princ-head h2{margin:14px auto 16px;font-size:clamp(34px,4.2vw,56px);font-weight:800;
+    line-height:1.03;letter-spacing:-.03em;color:var(--navy);text-wrap:balance}
+  .princ-head p{font-size:18px;color:var(--ink-soft);margin:0;line-height:1.55}
+  .princ-grid{max-width:1240px;margin:0 auto;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .princ-card{padding:32px 28px;border-radius:var(--radius-md);
+    background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-card);
+    display:flex;flex-direction:column;gap:14px;
+    transition:transform .25s,box-shadow .25s}
+  .princ-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+  .princ-num{font-family:"SF Mono",ui-monospace,monospace;font-size:12px;
+    color:var(--blue);letter-spacing:.1em;font-weight:600}
+  .princ-card h3{margin:0;font-size:22px;font-weight:700;letter-spacing:-.02em;color:var(--navy)}
+  .princ-card p{margin:0;font-size:15px;color:var(--ink-soft);line-height:1.55}
+  .princ-card .pico{width:44px;height:44px;border-radius:11px;display:grid;place-items:center;
+    color:#fff;margin-bottom:4px}
+  .princ-card .pico svg{width:22px;height:22px}
+
+  /* crypto pipeline */
+  .pipeline{padding:120px 28px;background:var(--navy);color:#fff;position:relative;overflow:hidden}
+  .pipeline::before{content:"";position:absolute;top:50%;left:50%;
+    width:1200px;height:600px;transform:translate(-50%,-50%);
+    background:radial-gradient(ellipse,rgba(26,115,232,.15),transparent 60%);
+    filter:blur(60px);pointer-events:none}
+  .pipeline-in{max-width:1100px;margin:0 auto;position:relative}
+  .pipeline-head{text-align:center;margin-bottom:60px}
+  .pipeline-head h2{margin:14px auto 16px;font-size:clamp(34px,4.2vw,56px);font-weight:800;
+    line-height:1.03;letter-spacing:-.03em;text-wrap:balance}
+  .pipeline-head p{font-size:18px;color:rgba(255,255,255,.7);max-width:560px;margin:0 auto;line-height:1.55}
+  .pipeline-flow{display:flex;align-items:stretch;gap:14px;flex-wrap:wrap;justify-content:center}
+  .pf-step{flex:1;min-width:180px;background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-md);
+    padding:24px;backdrop-filter:blur(20px);
+    display:flex;flex-direction:column;gap:10px;position:relative}
+  .pf-step--cipher{background:linear-gradient(180deg,rgba(26,115,232,.15),rgba(26,115,232,.05));
+    border-color:rgba(26,115,232,.3)}
+  .pf-step--upload{background:linear-gradient(180deg,rgba(30,159,78,.15),rgba(30,159,78,.05));
+    border-color:rgba(30,159,78,.3)}
+  .pf-num{font-family:"SF Mono",ui-monospace,monospace;font-size:11px;color:#9ccaff;letter-spacing:.1em;font-weight:600}
+  .pf-step h4{margin:0;font-size:17px;font-weight:700;letter-spacing:-.01em}
+  .pf-step p{margin:0;font-size:13px;color:rgba(255,255,255,.65);line-height:1.5;flex:1}
+  .pf-step code{font-family:"SF Mono",ui-monospace,monospace;font-size:11px;
+    background:rgba(0,0,0,.3);padding:8px 10px;border-radius:6px;color:#9ccaff;
+    border:1px solid rgba(255,255,255,.05);overflow:hidden;text-overflow:ellipsis}
+  .pf-arrow{align-self:center;color:rgba(255,255,255,.3);font-size:24px;font-weight:300}
+
+  /* threat model */
+  .threat{padding:120px 28px;background:#fff}
+  .threat-in{max-width:1100px;margin:0 auto}
+  .threat-head{text-align:center;margin-bottom:50px}
+  .threat-head h2{margin:14px auto 16px;font-size:clamp(34px,4.2vw,56px);font-weight:800;
+    line-height:1.03;letter-spacing:-.03em;color:var(--navy);text-wrap:balance}
+  .threat-head p{font-size:18px;color:var(--ink-soft);max-width:600px;margin:0 auto;line-height:1.55}
+  .threat-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .threat-col{padding:28px;border-radius:var(--radius-md);border:1px solid var(--line);
+    box-shadow:var(--shadow-card)}
+  .threat-col--good{background:linear-gradient(180deg,rgba(30,159,78,.05),#fff);
+    border-color:rgba(30,159,78,.2)}
+  .threat-col--bad{background:linear-gradient(180deg,rgba(255,59,48,.05),#fff);
+    border-color:rgba(255,59,48,.2)}
+  .threat-col h3{margin:0 0 18px;font-size:20px;font-weight:700;letter-spacing:-.02em;
+    color:var(--navy);display:flex;align-items:center;gap:10px}
+  .threat-col h3 .badge{width:30px;height:30px;border-radius:9px;
+    display:grid;place-items:center;color:#fff}
+  .threat-col--good .badge{background:var(--green)}
+  .threat-col--bad .badge{background:var(--red)}
+  .threat-col ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+  .threat-col li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--ink-soft);line-height:1.5}
+  .threat-col li::before{content:"";width:6px;height:6px;border-radius:50%;margin-top:8px;flex-shrink:0}
+  .threat-col--good li::before{background:var(--green)}
+  .threat-col--bad li::before{background:var(--red)}
+  .threat-col li b{color:var(--ink);font-weight:600}
+
+  /* faq */
+  .sec-faq{padding:120px 28px;background:#f7f9fc}
+  .sec-faq-in{max-width:760px;margin:0 auto}
+  .sec-faq h2{font-size:clamp(34px,4.2vw,56px);font-weight:800;
+    line-height:1.03;letter-spacing:-.03em;color:var(--navy);text-align:center;margin:0 0 48px}
+  .qa{background:#fff;border:1px solid var(--line);border-radius:var(--radius-sm);
+    padding:24px 28px;margin-bottom:12px;box-shadow:var(--shadow-card)}
+  .qa h4{margin:0 0 10px;font-size:17px;font-weight:700;letter-spacing:-.01em;color:var(--navy)}
+  .qa p{margin:0;font-size:15px;line-height:1.6;color:var(--ink-soft)}
+  .qa code{font-family:"SF Mono",ui-monospace,monospace;font-size:13px;
+    background:var(--blue-soft);padding:2px 7px;border-radius:5px;color:var(--navy)}
+
+  @media (max-width:900px){
+    .princ-grid{grid-template-columns:1fr}
+    .threat-grid{grid-template-columns:1fr}
+    .pf-arrow{transform:rotate(90deg)}
+  }
+</style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<section class="sec-hero">
+  <div class="sec-hero-in">
+    <span class="eyebrow"><span class="dot" style="background:#5fe89a"></span>End-to-end encryption · Trên thiết bị</span>
+    <h1>Quyền riêng tư <em>không phải</em><br/>là tính năng cộng thêm.</h1>
+    <p>Đó là nguyên tắc kiến trúc cốt lõi của TruyenDrive. Drive không bao giờ thấy nội dung của bạn, server của chúng tôi không tồn tại, và chúng tôi không lưu metadata về bạn.</p>
+  </div>
+</section>
+
+<!-- ════════ 3 PRINCIPLES ════════ -->
+<section class="principles">
+  <div class="princ-head reveal">
+    <span class="feat-tag">3 nguyên tắc</span>
+    <h2>Thiết kế xoay quanh <span style="color:var(--blue)">quyền riêng tư</span>.</h2>
+    <p>Không phải bằng cách dán nhãn — bằng cách quyết định không tồn tại các thành phần có thể vi phạm.</p>
+  </div>
+  <div class="princ-grid">
+    <div class="princ-card reveal">
+      <div class="pico" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" stroke="#fff" stroke-width="2"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <span class="princ-num">01 · ON-DEVICE</span>
+      <h3>Mã hoá trên thiết bị</h3>
+      <p>Mọi phép XOR + mulberry32 PRNG đều chạy trong tiến trình của ứng dụng — trên iPhone của bạn. Không có request mạng nào trong pipeline mã hoá. Drive chỉ nhận noise.</p>
+    </div>
+    <div class="princ-card reveal">
+      <div class="pico" style="background:var(--green)">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M3 12h4l3-8 4 16 3-8h4" stroke="#fff" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg>
+      </div>
+      <span class="princ-num">02 · ZERO-SERVER</span>
+      <h3>Không server trung gian</h3>
+      <p>TruyenDrive không có backend riêng. App giao tiếp trực tiếp với Drive API qua OAuth — chúng tôi không thấy bạn đăng nhập, không thấy truyện bạn đọc, không thấy tiến độ.</p>
+    </div>
+    <div class="princ-card reveal">
+      <div class="pico" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 3l8 4v5c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V7l8-4z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg>
+      </div>
+      <span class="princ-num">03 · ZERO-KNOWLEDGE</span>
+      <h3>Không lưu mật khẩu</h3>
+      <p>Password chỉ tồn tại trong RAM khi đang mã hoá/giải mã. Không Keychain, không server, không cloud sync. Bạn nhớ — chúng tôi không cách nào biết được.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ CRYPTO PIPELINE ════════ -->
+<section class="pipeline">
+  <div class="pipeline-in">
+    <div class="pipeline-head reveal">
+      <span class="feat-tag" style="color:#9ccaff">Crypto Pipeline</span>
+      <h2>Hành trình của <span style="background:linear-gradient(120deg,#9ccaff,#fff);-webkit-background-clip:text;background-clip:text;color:transparent">1 byte ảnh</span>.</h2>
+      <p>Từ khi bạn chọn ảnh đến khi Drive lưu trữ — 5 bước, không bước nào rời thiết bị ở dạng đọc được.</p>
+    </div>
+    <div class="pipeline-flow">
+      <div class="pf-step reveal">
+        <span class="pf-num">STEP 01</span>
+        <h4>Đọc plaintext</h4>
+        <p>Ứng dụng đọc file ảnh PNG/JPG từ Photos hoặc Files trên thiết bị.</p>
+        <code>IMG_5249.PNG · 746 KB</code>
+      </div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step reveal">
+        <span class="pf-num">STEP 02</span>
+        <h4>Derive seed</h4>
+        <p>Password của bạn + filename được hash để tạo seed cho PRNG. Mỗi ảnh có seed riêng.</p>
+        <code>seed = hash(pwd ⊕ name)</code>
+      </div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step pf-step--cipher reveal">
+        <span class="pf-num">STEP 03</span>
+        <h4>XOR + mulberry32</h4>
+        <p>PRNG sinh stream pseudo-random; XOR từng byte ảnh với stream. Tốc độ &lt; 15ms.</p>
+        <code>byte ⊕ prng() → cipher</code>
+      </div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step pf-step--upload reveal">
+        <span class="pf-num">STEP 04</span>
+        <h4>Upload ciphertext</h4>
+        <p>File đã mã hoá được upload trực tiếp lên Drive API. Drive chỉ thấy byte ngẫu nhiên.</p>
+        <code>Drive / TruyenDrive/</code>
+      </div>
+    </div>
+    <div style="margin-top:24px;text-align:center;color:rgba(255,255,255,.5);font-size:13px;font-family:'SF Mono',monospace">
+      ↻ Quá trình ngược lại khi đọc — giải mã trong RAM, không bao giờ ghi plaintext ra disk.
+    </div>
+  </div>
+</section>
+
+<!-- ════════ THREAT MODEL ════════ -->
+<section class="threat">
+  <div class="threat-in">
+    <div class="threat-head reveal">
+      <span class="feat-tag">Threat Model</span>
+      <h2>Chúng tôi <span style="color:var(--green)">bảo vệ</span> bạn khỏi điều gì?</h2>
+      <p>Mọi mô hình bảo mật cần được rõ ràng: cái gì chúng tôi giải quyết, cái gì <i>vẫn còn là vấn đề</i> của bạn.</p>
+    </div>
+    <div class="threat-grid">
+      <div class="threat-col threat-col--good reveal">
+        <h3>
+          <span class="badge"><svg width="16" height="16" viewBox="0 0 14 14" fill="none"><path d="M2 8l3 3 7-8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Bảo vệ khỏi
+        </h3>
+        <ul>
+          <li><div><b>Server Drive bị lộ dữ liệu.</b> Drive chỉ lưu ciphertext, không có khoá. Người tấn công lấy được file cũng chỉ thấy noise.</div></li>
+          <li><div><b>Nhân viên Google đọc file.</b> Họ thấy gì? Một mớ byte ngẫu nhiên không phân biệt được với /dev/urandom.</div></li>
+          <li><div><b>Khi sub-account chia sẻ.</b> Người được chia sẻ file mã hoá cũng cần password mới đọc được.</div></li>
+          <li><div><b>Ứng dụng bị reverse engineer.</b> Source code công khai, không có backdoor; thuật toán XOR + mulberry32 đã được kiểm chứng.</div></li>
+          <li><div><b>Khi đổi điện thoại.</b> Cài lại app, nhập đúng password — toàn bộ thư viện sẵn sàng.</div></li>
+        </ul>
+      </div>
+      <div class="threat-col threat-col--bad reveal">
+        <h3>
+          <span class="badge"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 3l8 8M11 3l-8 8" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg></span>
+          Không bảo vệ
+        </h3>
+        <ul>
+          <li><div><b>Mật khẩu yếu hoặc bị lộ.</b> Nếu password là "123456" hoặc bạn nói cho người khác — TruyenDrive không thể làm gì cả.</div></li>
+          <li><div><b>Điện thoại bị unlock và mở app.</b> Khi app đang chạy, ảnh đã giải mã hiển thị trên màn hình. Hãy dùng Face ID + Auto-lock.</div></li>
+          <li><div><b>Screenshot bởi người dùng.</b> Khi đọc, ai cầm máy có thể chụp màn hình. TruyenDrive là reader, không phải DRM.</div></li>
+          <li><div><b>Mất password.</b> Không có recovery, không có "quên mật khẩu". Đây là tradeoff cho zero-knowledge.</div></li>
+          <li><div><b>Phân tích metadata.</b> Drive có thể thấy bạn upload bao nhiêu file, vào lúc nào — chỉ nội dung được giấu.</div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ FAQ ════════ -->
+<section class="sec-faq">
+  <div class="sec-faq-in">
+    <h2 class="reveal">Câu hỏi về bảo mật</h2>
+    <div class="qa reveal">
+      <h4>XOR có thực sự an toàn không?</h4>
+      <p>XOR + stream cipher với PRNG mạnh tương đương với one-time-pad nếu seed được giữ bí mật và không tái dùng. TruyenDrive dùng <code>mulberry32</code> với seed derive từ password riêng cho từng file — không có hai file nào dùng cùng stream.</p>
+    </div>
+    <div class="qa reveal">
+      <h4>Tại sao không dùng AES?</h4>
+      <p>AES yêu cầu native crypto APIs phức tạp hơn để dùng đúng (IV, padding, mode). Với mục tiêu "đủ tốt cho ảnh truyện", XOR + PRNG cho tốc độ &lt; 15ms/ảnh trên iPhone — gấp 3 lần AES JavaScript, mà vẫn an toàn nếu password đủ mạnh. Roadmap có AES-256-GCM tùy chọn ở v3.0.</p>
+    </div>
+    <div class="qa reveal">
+      <h4>Nếu mất mật khẩu thì sao?</h4>
+      <p>Không có cách khôi phục. Đây là tradeoff cố ý của zero-knowledge: chúng tôi không lưu password, không thể reset cho bạn. Khuyến nghị: lưu password trong app quản lý mật khẩu như 1Password hoặc iCloud Keychain.</p>
+    </div>
+    <div class="qa reveal">
+      <h4>Drive có biết tôi đọc truyện gì không?</h4>
+      <p>Drive thấy bạn list folder, đọc file, upload file — đây là cách OAuth hoạt động. Nhưng <i>nội dung</i> của file đã mã hoá là noise với họ. Để giảm metadata leak, bạn có thể đặt tên folder/file không gợi nội dung.</p>
+    </div>
+    <div class="qa reveal">
+      <h4>Source code có được audit không?</h4>
+      <p>Source code mở hoàn toàn trên GitHub. Phần crypto được tách thành module riêng (~120 dòng Swift) để dễ review. Chúng tôi welcome mọi báo cáo bảo mật qua security@ctdo.dev.</p>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="assets/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Chính sách quyền riêng tư — TruyenDrive</title>
+<meta name="description" content="Chính sách quyền riêng tư của TruyenDrive. Chúng tôi tôn trọng dữ liệu của bạn — không lưu, không bán, không chia sẻ."/>
+<link rel="icon" href="assets/logo.png"/>
+<link rel="stylesheet" href="assets/styles.css"/>
+</head>
+<body>
+<div id="site-header"></div>
+
+<section class="page-head">
+  <span class="eyebrow"><span class="dot"></span>Cập nhật lần cuối: 19/05/2026</span>
+  <h1>Chính sách <em>quyền riêng tư</em></h1>
+  <p>Quyền riêng tư của bạn là nguyên tắc thiết kế cốt lõi — không phải tính năng cộng thêm. Đây là cách chúng tôi thực hiện điều đó.</p>
+</section>
+
+<main class="prose">
+  <aside class="prose-toc">
+    <h5>Trên trang này</h5>
+    <a href="#tldr">TL;DR</a>
+    <a href="#data-collected">Dữ liệu thu thập</a>
+    <a href="#how-used">Cách sử dụng</a>
+    <a href="#third-party">Bên thứ ba</a>
+    <a href="#security">Bảo mật dữ liệu</a>
+    <a href="#rights">Quyền của bạn</a>
+    <a href="#children">Trẻ em</a>
+    <a href="#changes">Thay đổi chính sách</a>
+    <a href="#contact-privacy">Liên hệ</a>
+  </aside>
+
+  <div class="prose-meta">
+    <div><b>Phiên bản:</b> 2.4</div>
+    <div><b>Hiệu lực:</b> 19/05/2026</div>
+    <div><b>Áp dụng:</b> TruyenDrive iOS</div>
+  </div>
+
+  <h2 id="tldr">TL;DR — Tóm tắt nhanh</h2>
+  <blockquote>
+    <p><strong>Chúng tôi không thu thập dữ liệu cá nhân của bạn.</strong> TruyenDrive không có server backend; mọi tương tác diễn ra giữa thiết bị của bạn và Google Drive. Chúng tôi không thấy, không lưu, không bán, và không chia sẻ thông tin nào về bạn.</p>
+  </blockquote>
+  <p>Phần còn lại của tài liệu này giải thích chi tiết. Nếu chỉ đọc một mục, hãy đọc mục này.</p>
+
+  <h2 id="data-collected">1. Dữ liệu chúng tôi thu thập</h2>
+  <h3>1.1. Dữ liệu chúng tôi <em>không</em> thu thập</h3>
+  <ul>
+    <li><strong>Thông tin tài khoản Google</strong> — Email, tên, ảnh đại diện. Khi bạn đăng nhập Drive qua OAuth, các thông tin này được iOS/Drive xử lý — chúng tôi không thấy.</li>
+    <li><strong>Nội dung file</strong> — Truyện, ảnh, tài liệu trong Drive. Chúng được tải từ Drive xuống thiết bị bạn để hiển thị; không có bản sao nào gửi đến server của chúng tôi.</li>
+    <li><strong>Tiến độ đọc &amp; bookmark</strong> — Lưu vào file ẩn trên Drive của bạn. Đồng bộ qua Drive API, không qua chúng tôi.</li>
+    <li><strong>Mật khẩu mã hoá</strong> — Chỉ tồn tại trong RAM khi đang mã hoá/giải mã. Không Keychain, không cloud, không log.</li>
+    <li><strong>Vị trí, danh bạ, mic, camera</strong> — Ứng dụng không xin các quyền này.</li>
+    <li><strong>IP của bạn</strong> — Drive thấy IP của bạn (như mọi dịch vụ Google); chúng tôi không.</li>
+    <li><strong>Tracking/analytics quảng cáo</strong> — Không có. Không Facebook Pixel, không Google Analytics, không Mixpanel.</li>
+  </ul>
+
+  <h3>1.2. Dữ liệu được lưu <em>trên thiết bị</em></h3>
+  <p>Các dữ liệu sau được lưu cục bộ trên thiết bị bạn (không bao giờ rời khỏi):</p>
+  <ul>
+    <li><strong>Cache ảnh</strong> — Ảnh đã giải mã được cache để load nhanh lần sau. Mặc định giới hạn 233 MB. Bạn có thể xoá trong Cài đặt.</li>
+    <li><strong>Preferences</strong> — Chế độ đọc, brightness, theme, kích thước font — lưu trong NSUserDefaults của iOS.</li>
+    <li><strong>Lịch sử đọc gần</strong> — Danh sách truyện vừa mở — lưu trong file local.</li>
+    <li><strong>OAuth refresh token cho Drive</strong> — Lưu trong iOS Keychain (mã hoá bởi Apple) để bạn không phải đăng nhập lại mỗi lần mở app.</li>
+  </ul>
+
+  <h3>1.3. Dữ liệu tuỳ chọn nếu bạn bật</h3>
+  <ul>
+    <li><strong>Crash reporting</strong> — Mặc định <em>tắt</em>. Nếu bạn bật trong Cài đặt → Hỗ trợ, crash log (kèm stack trace, không kèm nội dung file) được gửi đến Sentry để chúng tôi sửa lỗi. Có thể tắt bất cứ lúc nào.</li>
+    <li><strong>Email khi liên hệ qua form</strong> — Nếu bạn gửi email cho chúng tôi qua form liên hệ, chúng tôi lưu email + nội dung tin nhắn để trả lời, sau đó xoá sau 90 ngày.</li>
+  </ul>
+
+  <h2 id="how-used">2. Cách chúng tôi sử dụng dữ liệu</h2>
+  <p>Vì chúng tôi gần như không thu thập dữ liệu, mục này rất ngắn:</p>
+  <ul>
+    <li><strong>Cache cục bộ</strong> được dùng để tăng tốc trải nghiệm đọc — không gửi đi đâu.</li>
+    <li><strong>OAuth token</strong> được dùng để app đại diện bạn yêu cầu Drive — không gửi đến chúng tôi.</li>
+    <li><strong>Crash log (nếu bạn bật)</strong> chỉ được dùng để chẩn đoán &amp; sửa lỗi. Tự huỷ sau 30 ngày.</li>
+  </ul>
+  <p>Chúng tôi <strong>không</strong>:</p>
+  <ul>
+    <li>Bán dữ liệu của bạn cho bất kỳ ai;</li>
+    <li>Dùng dữ liệu để training AI;</li>
+    <li>Chia sẻ dữ liệu trừ khi bắt buộc theo pháp luật (và sẽ thông báo bạn nếu khả thi);</li>
+    <li>Profile hành vi đọc của bạn để target quảng cáo (chúng tôi không có quảng cáo).</li>
+  </ul>
+
+  <h2 id="third-party">3. Dịch vụ bên thứ ba</h2>
+  <p>TruyenDrive tương tác với các bên thứ ba sau:</p>
+  <h3>3.1. Google Drive</h3>
+  <p>Khi bạn đăng nhập Drive, ứng dụng dùng <strong>OAuth 2.0</strong> của Google. Chúng tôi yêu cầu phạm vi (<code>scope</code>):</p>
+  <ul>
+    <li><code>drive.file</code> — chỉ thấy file/folder do app của chúng tôi tạo hoặc bạn mở qua app. <em>Không</em> thấy toàn bộ Drive.</li>
+    <li><code>drive.metadata.readonly</code> — đọc metadata (tên file, kích thước) để hiển thị danh sách.</li>
+  </ul>
+  <p>Việc bạn dùng Drive được chi phối bởi <a href="https://policies.google.com/privacy" target="_blank">Chính sách quyền riêng tư của Google</a>.</p>
+
+  <h3>3.2. Apple (App Store &amp; iCloud)</h3>
+  <p>App được phân phối qua App Store. Apple thu thập một số thông tin (tải về, crash anonymized) theo chính sách của họ. Tuỳ chọn iCloud Backup có thể bao gồm dữ liệu app — bạn kiểm soát qua Cài đặt iOS.</p>
+
+  <h3>3.3. Sentry (chỉ nếu bạn bật crash reporting)</h3>
+  <p>Sentry là dịch vụ crash reporting tự host. Chỉ nhận stack trace ẩn danh — không bao giờ nhận nội dung file của bạn.</p>
+
+  <h2 id="security">4. Bảo mật dữ liệu</h2>
+  <p>Tất cả dữ liệu mà bạn lựa chọn mã hoá đều được mã hoá <strong>trên thiết bị</strong> bằng XOR + mulberry32 PRNG với mật khẩu do bạn cung cấp. Chi tiết kỹ thuật xem ở <a href="security.html">trang Bảo mật</a>.</p>
+  <p>OAuth tokens được lưu trong <strong>iOS Keychain</strong>, được bảo vệ bởi Secure Enclave của Apple.</p>
+  <p>Communication với Drive API qua HTTPS với certificate pinning để phòng MITM attack.</p>
+
+  <h2 id="rights">5. Quyền của bạn</h2>
+  <p>Theo GDPR (EU), CCPA (California), và PDPL Việt Nam:</p>
+  <ul>
+    <li><strong>Quyền truy cập</strong> — Bạn có thể xem mọi dữ liệu app lưu trên thiết bị qua Cài đặt → Hỗ trợ → Xuất dữ liệu.</li>
+    <li><strong>Quyền xoá</strong> — Xoá app sẽ xoá toàn bộ dữ liệu cục bộ. Để xoá file đã mã hoá trên Drive, xoá trong Drive như file thường.</li>
+    <li><strong>Quyền chỉnh sửa</strong> — Mọi cài đặt đều có thể chỉnh sửa trong app.</li>
+    <li><strong>Quyền phản đối</strong> — Tắt crash reporting bất cứ lúc nào trong Cài đặt.</li>
+    <li><strong>Quyền tính di động</strong> — Tiến độ đọc / bookmark lưu trên Drive của bạn dưới dạng JSON — bạn sở hữu hoàn toàn.</li>
+  </ul>
+
+  <h2 id="children">6. Trẻ em dưới 13 tuổi</h2>
+  <p>TruyenDrive không nhắm đến trẻ em dưới 13 tuổi và không cố ý thu thập dữ liệu của họ. Nếu bạn là phụ huynh và phát hiện trẻ em đã cung cấp thông tin cho chúng tôi qua form liên hệ, vui lòng email <a href="mailto:privacy@ctdo.dev">privacy@ctdo.dev</a> để chúng tôi xoá ngay.</p>
+
+  <h2 id="changes">7. Thay đổi chính sách</h2>
+  <p>Khi cập nhật chính sách này, chúng tôi sẽ:</p>
+  <ul>
+    <li>Cập nhật ngày "Cập nhật lần cuối" ở đầu trang;</li>
+    <li>Thông báo trong app khi mở lần đầu sau cập nhật, nếu thay đổi là <em>material</em> (ảnh hưởng quyền của bạn);</li>
+    <li>Giữ lại phiên bản cũ trên GitHub để bạn so sánh.</li>
+  </ul>
+
+  <h2 id="contact-privacy">8. Liên hệ về quyền riêng tư</h2>
+  <p>Mọi câu hỏi, khiếu nại, hoặc yêu cầu liên quan đến quyền riêng tư:</p>
+  <ul>
+    <li>Email: <a href="mailto:privacy@ctdo.dev">privacy@ctdo.dev</a></li>
+    <li>Form: <a href="support.html#contact">support.html</a></li>
+    <li>Thư: TruyenDrive Privacy, CTDO Team, TP. Hồ Chí Minh, Việt Nam</li>
+  </ul>
+  <p>Chúng tôi cam kết phản hồi mọi yêu cầu trong <strong>30 ngày</strong> theo quy định GDPR.</p>
+
+  <hr/>
+  <p style="font-size:13px;color:var(--ink-muted)">© 2025 TruyenDrive. Tài liệu này được phát hành theo giấy phép CC BY 4.0 — bạn có thể sao chép, sửa đổi và phân phối, miễn ghi nguồn.</p>
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/site.js"></script>
+</body>
+</html>
