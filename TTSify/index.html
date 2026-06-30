@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TTSify - AI Text to Speech</title>
+    <meta name="description" content="TTSify - Ứng dụng chuyển đổi văn bản thành giọng nói AI tiên tiến với kho giọng khổng lồ.">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
+            --accent: #6c5ce7;
+            --accent-hover: #8174f2;
+            --text-main: #ffffff;
+            --text-sub: rgba(255, 255, 255, 0.6);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            padding: 15px 20px;
+        }
+
+        nav .nav-container {
+            display: flex;
+            gap: 20px;
+            max-width: 800px;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        /* Content Container */
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 100px 20px 60px;
+        }
+
+        section {
+            margin-bottom: 80px;
+            padding-top: 80px; /* Offset for sticky nav */
+            margin-top: -80px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: #a29bfe;
+        }
+
+        p {
+            color: var(--text-sub);
+            margin-bottom: 15px;
+        }
+
+        ul {
+            color: var(--text-sub);
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background: var(--accent-hover);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid var(--border);
+            color: var(--text-sub);
+            font-size: 14px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 600px) {
+            nav .nav-container {
+                gap: 15px;
+            }
+            h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#marketing">Trang chủ</a>
+            <a href="#support">Hỗ trợ</a>
+            <a href="#privacy">Quyền riêng tư</a>
+            <a href="#terms">Điều khoản</a>
+        </div>
+    </nav>
+
+    <main>
+        <!-- 1. MARKETING URL -->
+        <section id="marketing">
+            <div class="card" style="text-align: center; padding: 60px 20px;">
+                <h1>TTSify</h1>
+                <p style="font-size: 1.2rem; color: var(--text-main);">Chuyển văn bản thành giọng nói AI thế hệ mới</p>
+                <p>Khám phá kho tàng gần 100 giọng đọc AI chất lượng cao (Tiếng Việt, Anh, Trung, Nhật, v.v.). Giải pháp hoàn hảo cho việc lồng tiếng TikTok, YouTube, Podcast và Sách nói.</p>
+                <a href="https://apps.apple.com" class="btn">Tải xuống trên App Store</a>
+            </div>
+        </section>
+
+        <!-- 2. SUPPORT URL -->
+        <section id="support">
+            <h2>Hỗ trợ (Support)</h2>
+            <div class="card">
+                <p>Cảm ơn bạn đã sử dụng TTSify! Nếu bạn gặp bất kỳ vấn đề gì trong quá trình trải nghiệm, chúng tôi luôn sẵn sàng giúp đỡ.</p>
+                <h3>Câu hỏi thường gặp (FAQ)</h3>
+                <ul>
+                    <li><strong>App có yêu cầu kết nối mạng không?</strong> - Có, bạn cần kết nối Internet để AI có thể tạo giọng nói.</li>
+                    <li><strong>Làm sao để xuất file âm thanh?</strong> - Sau khi chuyển đổi thành công, nhấn vào biểu tượng Share (Chia sẻ) bên cạnh thanh phát nhạc để lưu file MP3.</li>
+                    <li><strong>Tại sao một số giọng không hoạt động?</strong> - Các giọng Pro/VIP có thể yêu cầu tài khoản nâng cấp, phần lớn các giọng khác hoàn toàn miễn phí.</li>
+                </ul>
+                <h3>Liên hệ với chúng tôi</h3>
+                <p>Email hỗ trợ: <strong>support@ttsify.com</strong> <i>(Vui lòng thay bằng email thật của bạn)</i></p>
+                <p>Thời gian phản hồi: Trong vòng 24 - 48 giờ làm việc.</p>
+            </div>
+        </section>
+
+        <!-- 3. PRIVACY POLICY URL -->
+        <section id="privacy">
+            <h2>Chính sách Quyền riêng tư (Privacy Policy)</h2>
+            <p>Cập nhật lần cuối: Tháng 6/2026</p>
+            
+            <h3>1. Thu thập thông tin</h3>
+            <p>TTSify tôn trọng quyền riêng tư của bạn. Ứng dụng <strong>KHÔNG</strong> thu thập, lưu trữ hoặc chia sẻ bất kỳ thông tin nhận dạng cá nhân nào (như tên, số điện thoại, địa chỉ email) lên máy chủ của chúng tôi khi chưa được sự cho phép.</p>
+            
+            <h3>2. Dữ liệu Văn bản và Âm thanh</h3>
+            <p>Văn bản bạn nhập vào được gửi trực tiếp đến API của bên thứ 3 (CapCut/Bytedance) để xử lý và tạo ra âm thanh. Chúng tôi không lưu trữ nội dung văn bản hay file âm thanh của bạn trên máy chủ riêng của ứng dụng. Lịch sử chuyển đổi chỉ được lưu trữ cục bộ (local) trên thiết bị của bạn.</p>
+
+            <h3>3. Phân tích dữ liệu (Analytics)</h3>
+            <p>Chúng tôi có thể sử dụng các công cụ của bên thứ ba (như Firebase Crashlytics) để thu thập log lỗi ẩn danh, giúp cải thiện độ ổn định của ứng dụng. Dữ liệu này không thể định danh cá nhân bạn.</p>
+
+            <h3>4. Cập nhật chính sách</h3>
+            <p>Chính sách này có thể được cập nhật trong tương lai. Bạn vui lòng thường xuyên truy cập trang này để theo dõi các thay đổi mới nhất.</p>
+        </section>
+
+        <!-- 4. TERMS OF SERVICE URL -->
+        <section id="terms">
+            <h2>Điều khoản Sử dụng (Terms of Service)</h2>
+            <p>Cập nhật lần cuối: Tháng 6/2026</p>
+
+            <h3>1. Chấp nhận điều khoản</h3>
+            <p>Bằng việc tải xuống và sử dụng TTSify, bạn đồng ý tuân thủ các Điều khoản Sử dụng này. Nếu không đồng ý, vui lòng ngừng sử dụng ứng dụng.</p>
+
+            <h3>2. Quyền và Trách nhiệm của người dùng</h3>
+            <ul>
+                <li>Bạn tự chịu trách nhiệm về nội dung văn bản mà bạn nhập vào ứng dụng để chuyển đổi.</li>
+                <li>Không sử dụng ứng dụng để tạo ra các nội dung vi phạm pháp luật, đe doạ, phỉ báng, hoặc vi phạm bản quyền/quyền riêng tư của người khác.</li>
+            </ul>
+
+            <h3>3. Sở hữu trí tuệ</h3>
+            <p>Giao diện, mã nguồn và thiết kế của TTSify thuộc bản quyền của nhà phát triển. Giọng nói được tạo ra được cấp phép bởi dịch vụ cung cấp API gốc (CapCut/Bytedance), bạn cần tuân thủ các chính sách thương mại của nền tảng đó khi sử dụng file âm thanh vào mục đích kiếm tiền.</p>
+
+            <h3>4. Từ chối bảo đảm</h3>
+            <p>Ứng dụng được cung cấp "NGUYÊN TRẠNG" (As Is). Chúng tôi không đảm bảo rằng dịch vụ sẽ không bao giờ bị gián đoạn hoặc không có lỗi mạng từ phía nhà cung cấp API.</p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 TTSify. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
